@@ -1,0 +1,2777 @@
+{
+	"info": {
+		"_postman_id": "a3f30967-ad77-4377-bfc7-20e1f59adccf",
+		"name": "Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Transactions Operation",
+			"item": [
+				{
+					"name": "EMP",
+					"item": [
+						{
+							"name": "Authorize (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 100,\n  \"cardExpireMonth\": \"03\",\n  \"cardExpireYear\": \"2026\",\n  \"cardHolderName\": \"Dejan\",\n  \"cardSecurityCode\": \"123\",\n  \"cardNumber\": \"4111111111111111\",\n  \"clientOrderId\": \"100\",\n  \"currency\": \"USD\",\n  \"customerAddress\": \"Skopje\",\n  \"customerCity\": \"Skopje\",\n  \"customerCountryCode\": \"US\",\n  \"customerEmail\": \"dejan@dejan.com\",\n  \"customerIp\": \"123.123.123.123\",\n  \"customerName\": \"Dejan\",\n  \"customerLastName\" : \"Popovski\",\n  \"customerPhone\": \"+3123123112312\",\n  \"customerState\": \"Mkd\",\n  \"customerZipCode\": \"1000\",\n  \"midId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/authorize?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Capture (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 100,\n  \"transactionID\":  2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/capture?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"capture"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sale (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 100,\n  \"cardExpireMonth\": \"03\",\n  \"cardExpireYear\": \"2025\",\n  \"cardHolderName\": \"Dejan\",\n  \"cardNumber\": \"4111111111111111\",\n  \"cardSecurityCode\": \"244\",\n  \"clientOrderId\": \"100\",\n  \"currency\": \"USD\",\n  \"customerAddress\": \"Skopje\",\n  \"customerCity\": \"Skopje\",\n  \"customerCountryCode\": \"US\",\n  \"customerEmail\": \"dejan@dejan.com\",\n  \"customerIp\": \"123.123.123.123\",\n  \"customerName\": \"Dejan\",\n  \"customerLastName\" : \"Popovski\",\n  \"customerPhone\": \"+3123123112312\",\n  \"customerState\": \"Mkd\",\n  \"customerZipCode\": \"1000\",\n  \"midId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/sale?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"sale"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\": 6\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/cancel?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refund (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/refund?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"refund"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rebill (EMP)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 100,\n  \"transactionID\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/rebill?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"rebill"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TSYS",
+					"item": [
+						{
+							"name": "Specific",
+							"item": [
+								{
+									"name": "Authorize (TSYS) - MOTO",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"amount\": 1800,\n    \"cardExpireMonth\": \"12\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Dejan\",\n    \"cardSecurityCode\": \"999\",\n    \"cardNumber\": \"4012000098765439\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"dejan@dejan.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Dejan\",\n    \"customerLastName\": \"Popovski\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 2,\n    \"tokenEnabled\": false,\n    \"motoEnabled\" : true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/authorize",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"authorize"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Capture (TSYS) - MOTO",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"amount\": 1800,\n    \"transactionID\":3,\n    \"tokenEnabled\" :false,\n    \"motoEnabled\" : true,\n    \"offlineEnabled\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/capture",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"capture"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Capture (TSYS) - Offline",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"amount\": 1800,\n    \"transactionID\":5,\n    \"tokenEnabled\" :false,\n    \"motoEnabled\" : false,\n    \"offlineEnabled\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/capture",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"capture"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Archived",
+							"item": [
+								{
+									"name": "Apple Pay",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"token\": {\n        \"paymentData\": {\n            \"data\": \"0NmbXdx+O6zBLJC2r9/wtlO9+NZUJhnHoMHeD2lKAcErNZG+0FqoabYk3MsZvE3GdWlvj8Yh5Uq19WMHH5xXIItpWBpMG4S6QMXZQtWTjJh221m7Z70GL8VeX6zQ20R4gax0cE2XUKmwfEqyrz5ZhjkXO0I0DrAznYpnJTNkkStBcc39A0YvBdYCXOz/soUSKZOk85VUV/tF+sfvTByWmDQSOTeiDYRiLWDShuBiMrP6eqkkmgwuOKTynj230O/rOu5i5HdgODEaym5xapvg/E+F0CyInM0nX6azpacCfZpMbHCP6yo/zb0kpp6wdmOO37W8DmAouEA28N56AHETQGopCOPAoZRBGr06AXBnOVxnojSFYI3iDsgUx3/MLdgCX336vr/919pN93sP\",\n            \"signature\": \"MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCAMIID5DCCA4ugAwIBAgIIWdihvKr0480wCgYIKoZIzj0EAwIwejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTIxMDQyMDE5MzcwMFoXDTI2MDQxOTE5MzY1OVowYjEoMCYGA1UEAwwfZWNjLXNtcC1icm9rZXItc2lnbl9VQzQtU0FOREJPWDEUMBIGA1UECwwLaU9TIFN5c3RlbXMxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgjD9q8Oc914gLFDZm0US5jfiqQHdbLPgsc1LUmeY+M9OvegaJajCHkwz3c6OKpbC9q+hkwNFxOh6RCbOlRsSlaOCAhEwggINMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUI/JJxE+T5O8n5sT2KGw/orv9LkswRQYIKwYBBQUHAQEEOTA3MDUGCCsGAQUFBzABhilodHRwOi8vb2NzcC5hcHBsZS5jb20vb2NzcDA0LWFwcGxlYWljYTMwMjCCAR0GA1UdIASCARQwggEQMIIBDAYJKoZIhvdjZAUBMIH+MIHDBggrBgEFBQcCAjCBtgyBs1JlbGlhbmNlIG9uIHRoaXMgY2VydGlmaWNhdGUgYnkgYW55IHBhcnR5IGFzc3VtZXMgYWNjZXB0YW5jZSBvZiB0aGUgdGhlbiBhcHBsaWNhYmxlIHN0YW5kYXJkIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHVzZSwgY2VydGlmaWNhdGUgcG9saWN5IGFuZCBjZXJ0aWZpY2F0aW9uIHByYWN0aWNlIHN0YXRlbWVudHMuMDYGCCsGAQUFBwIBFipodHRwOi8vd3d3LmFwcGxlLmNvbS9jZXJ0aWZpY2F0ZWF1dGhvcml0eS8wNAYDVR0fBC0wKzApoCegJYYjaHR0cDovL2NybC5hcHBsZS5jb20vYXBwbGVhaWNhMy5jcmwwHQYDVR0OBBYEFAIkMAua7u1GMZekplopnkJxghxFMA4GA1UdDwEB/wQEAwIHgDAPBgkqhkiG92NkBh0EAgUAMAoGCCqGSM49BAMCA0cAMEQCIHShsyTbQklDDdMnTFB0xICNmh9IDjqFxcE2JWYyX7yjAiBpNpBTq/ULWlL59gBNxYqtbFCn1ghoN5DgpzrQHkrZgTCCAu4wggJ1oAMCAQICCEltL786mNqXMAoGCCqGSM49BAMCMGcxGzAZBgNVBAMMEkFwcGxlIFJvb3QgQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTE0MDUwNjIzNDYzMFoXDTI5MDUwNjIzNDYzMFowejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE8BcRhBnXZIXVGl4lgQd26ICi7957rk3gjfxLk+EzVtVmWzWuItCXdg0iTnu6CP12F86Iy3a7ZnC+yOgphP9URaOB9zCB9DBGBggrBgEFBQcBAQQ6MDgwNgYIKwYBBQUHMAGGKmh0dHA6Ly9vY3NwLmFwcGxlLmNvbS9vY3NwMDQtYXBwbGVyb290Y2FnMzAdBgNVHQ4EFgQUI/JJxE+T5O8n5sT2KGw/orv9LkswDwYDVR0TAQH/BAUwAwEB/zAfBgNVHSMEGDAWgBS7sN6hWDOImqSKmd6+veuv2sskqzA3BgNVHR8EMDAuMCygKqAohiZodHRwOi8vY3JsLmFwcGxlLmNvbS9hcHBsZXJvb3RjYWczLmNybDAOBgNVHQ8BAf8EBAMCAQYwEAYKKoZIhvdjZAYCDgQCBQAwCgYIKoZIzj0EAwIDZwAwZAIwOs9yg1EWmbGG+zXDVspiv/QX7dkPdU2ijr7xnIFeQreJ+Jj3m1mfmNVBDY+d6cL+AjAyLdVEIbCjBXdsXfM4O5Bn/Rd8LCFtlk/GcmmCEm9U+Hp9G5nLmwmJIWEGmQ8Jkh0AADGCAY0wggGJAgEBMIGGMHoxLjAsBgNVBAMMJUFwcGxlIEFwcGxpY2F0aW9uIEludGVncmF0aW9uIENBIC0gRzMxJjAkBgNVBAsMHUFwcGxlIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MRMwEQYDVQQKDApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUwIIWdihvKr0480wDQYJYIZIAWUDBAIBBQCggZUwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjIwNDEyMDU0ODE5WjAqBgkqhkiG9w0BCTQxHTAbMA0GCWCGSAFlAwQCAQUAoQoGCCqGSM49BAMCMC8GCSqGSIb3DQEJBDEiBCA7hqNCuMDH1bDXgNZG1IDggCZRap8sXz9de2TQeMgHRzAKBggqhkjOPQQDAgRIMEYCIQCY6naUcVSCcW+ya8hETNbdwcP4LWogdooySx1Avr4poQIhAN86x7jfP4n3ZYhUtuE6qoBPV9vIL/dkqkZKq3yfcbKvAAAAAAAA\",\n            \"header\": {\n                \"publicKeyHash\": \"IhhPGBcPOucUmM3XS6gAYDaBSVrY+afwSf1Y+sCG9pY=\",\n                \"ephemeralPublicKey\": \"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE5OOjot27lND/x3kCYmk9MxT+4BvXwcqDZLvhkfhbD3KMNOmUDZUYMaTwC+njF9nN+DJEg0B49g3HKv68xtYpSA==\",\n                \"transactionId\": \"97a9c8d629fa5cb6bdd72ac0647c459f7e0daec06e978c14770f4ab835954866\"\n            },\n            \"version\": \"EC_v1\"\n        },\n        \"paymentMethod\": {\n            \"displayName\": \"MasterCard 1505\",\n            \"network\": \"MasterCard\",\n            \"type\": \"debit\"\n        },\n        \"transactionIdentifier\": \"97A9C8D629FA5CB6BDD72AC0647C459F7E0DAEC06E978C14770F4AB835954866\"\n    },\n    \"amount\" : \"200\",\n    \"midId\" : 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/tsysApplePay?_csrf={{csrftoken}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"tsysApplePay"
+											],
+											"query": [
+												{
+													"key": "_csrf",
+													"value": "{{csrftoken}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Samsung Pay",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"requestId\": \"121befda-3acb-4a56-bf4c-688fccee59ad\",\n    \"methodName\": \"https://spay.samsung.com\",\n    \"details\": {\n        \"method\": \"3DS\",\n        \"paymentCredential\": {\n            \"3DS\": {\n                \"data\": \"eyJhbGciOiJSU0ExXzUiLCJraWQiOiJOc0k4ZnREcFFuaVE1LzRlcHcxS0pEOVR4bHIxaFg5NWtUdjcvbThLUThvPSIsInR5cCI6IkpPU0UiLCJjaGFubmVsU2VjdXJpdHlDb250ZXh0IjoiUlNBX1BLSSIsImVuYyI6IkExMjhHQ00ifQ.ivAQmuhk477BPuRdZE0WlVcvaYySa8WdtoYVJBKfv_kbkZ9p35a5kpc0A5cuZ5NnaFGWLaxSK30-bV4FBQOX0iOkvE4_uZRvjadFnvGwrGaQz77ijs1QWXtly6bdwenjA4cxdubBE0Rb4wJMaiaSgPoKkHTYypXgRc3BzfLRWxGU41_E_8x40J94-GT1rDV19ZntD8KLBuuUa1pu4441PuBqTs0hmWpOW78DFArQaEEtIRW_uFHuwWeFcaXn_PAwpjdOs2XrQPevW9p4nCai4JCAQKZu1zbjw-bixxBN3dAtA0ePXla3XnsExzj9VtlRVFSpXVzznHum-r9rQZ3CVQ.ehLn3IUWqFORcVjh.gXnaDvWdXpNAPb_YIeD65AtoGSWHxRPA6rc_TrxiH368ldJuwyMBRPZFeOFXco7MPRv-KkuycH6g1ZSzmx4ddjljVOhrdWDUt50w-5DTGctBl1zbSdNgGcBSjh8rZB8zCnvRgMWqk2B3i3wUP4ZwrdtpdNpcyDrOSwHzPmGeHrUHdCDgCtJN6GV8qbjhv4RzbkpmQxMIKcNDwItvlNRKIQlydHlFvHIFeIYswgvrJGJQKhw8I-ANwg.rZfDPWPfXh5avXgCfL3Rkw\",\n                \"type\": \"S\",\n                \"version\": \"100\"\n            },\n            \"recurring_payment\": \"false\"\n        },\n        \"paymentInfo\": {\n            \"card_last4digits\": \"3395\",\n            \"cardBrand\": \"visa\",\n            \"orderNumber\": \"1233123\"\n        }\n    },\n    \"shippingAddress\": null,\n    \"shippingOption\": null,\n    \"payerName\": null,\n    \"payerEmail\": null,\n    \"payerPhone\": null,\n    \"amount\" : \"200\",\n    \"midId\" : 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/tsysSamsungPay?_csrf={{csrftoken}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"tsysSamsungPay"
+											],
+											"query": [
+												{
+													"key": "_csrf",
+													"value": "{{csrftoken}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Google Pay",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "nimda",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "dejan",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"signature\": \"MEQCIHT7dqG21rDliH/k+K7KY/bjWAW5YHiICYuzy0z8mNwSAiBmr3ahvJtp9iFV7MCZKhW+Tkd6QdZdSRj1EnjSaloJcQ\\u003d\\u003d\",\n  \"intermediateSigningKey\": {\n    \"signedKey\": \"{\\\"keyValue\\\":\\\"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEpLW2381p5iDx2R5LsrPIS+57V857CJ1yQ0VuxAclt67ZzmFaJJAc5umUb/d2ixCyiKWT0ONBqT47OWDlg3Pnfw\\\\u003d\\\\u003d\\\",\\\"keyExpiration\\\":\\\"1650436623306\\\"}\",\n    \"signatures\": [\n      \"MEUCIHBUKgmWvbHXw8Apo15Q8TICVhC4KPQObDGza8Y1aGWoAiEA3+qAYthHYdKB8x9IgxwQ3oELM4RPXihc3a1phlGsbOg\\u003d\"\n    ]\n  },\n  \"protocolVersion\": \"ECv2\",\n  \"signedMessage\": \"{\\\"encryptedMessage\\\":\\\"PejNL2uVn/U48IoVqixSa5qS+F7PxFP7IaI6ycxl0H1Mq5TeKr6ZbA6C/aud1ag0Giutq82W8em+PNUnpqSNB/8L29oebrkfES0lZd0ryYUCPmgF/xkPC8zbIaz188FWdke3V/DUZMWRZDncJfx1ZflPTfcI/QQ6Tv8jZEQ2psthxBWj5PTPZW/RUS57muQxiZbRVGmBcDAo4d0fie/BKTmA8O+yMxUg1vltk0wKPU8G8u97CZoJ5WCmoUpmD1tlWeWfZesqSLM2gm/+04Ve0o7PzpTzWPMzi8vXxn3MTLNrAKnQ6aLJ79hFJ4hFgPNOW2kAVVglyinECE0XsIZ6OZX4wOMDsIqB+xxTOYLT01ldbc2zvsGaJoBKrskuZo9DQLcaNKLQB/JULEJdldgXorADkP0zHikHY++DMzVDm+K+hOMMmPrI/boCZuk\\\\u003d\\\",\\\"ephemeralPublicKey\\\":\\\"BDT0LcoCp3IcYCgJSuwTXEwvwNvPuns+H+1be7pVHUqQwVCQ69vdNitRMv9t2ntlRTFSHiWLRxxs2gSRV05Bqys\\\\u003d\\\",\\\"tag\\\":\\\"Frn92nHY3pj0LPnbvaGaye9uF+faqqUxnCpecuPZitM\\\\u003d\\\"}\",\n   \"amount\" : \"200\",\n    \"midId\" : 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/tsysGooglePay?_csrf={{csrftoken}}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"tsysGooglePay"
+											],
+											"query": [
+												{
+													"key": "_csrf",
+													"value": "{{csrftoken}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Authorize (TSYS)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 18.351,\n    \"cardExpireMonth\": \"12\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Eli\",\n    \"cardSecurityCode\": \"999\",\n    \"cardNumber\": \"4012000098765439\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"eli@panov.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Eli\",\n    \"customerLastName\": \"Panov\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 2,\n    \"tokenEnabled\": false,\n    \"motoEnabled\": false\n   \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/authorize",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"authorize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Recurring (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 1800,\n    \"cardExpireMonth\": \"12\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Dejan\",\n    \"cardSecurityCode\": \"999\",\n    \"cardNumber\": \"4012000098765439\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"dejan@dejan.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Dejan\",\n    \"customerLastName\": \"Popovski\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 2,\n    \"tokenEnabled\": true,\n    \"motoEnabled\" : false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recurring?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recurring"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Card Ahtentication (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 0,\n    \"cardExpireMonth\": \"12\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Dejan\",\n    \"cardSecurityCode\": \"999\",\n    \"cardNumber\": \"4012000098765439\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"dejan@dejan.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Dejan\",\n    \"customerLastName\": \"Popovski\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 2,\n    \"tokenEnabled\" : true,\n    \"motoEnabled\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/tsysCardAuthentication?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"tsysCardAuthentication"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Capture (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 1800,\n    \"transactionID\":9,\n    \"tokenEnabled\" :true,\n    \"motoEnabled\" : false,\n    \"offlineEnabled\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/capture?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"capture"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\":1,\n  \"settlementAmount\":\"300\",\n  \"tokenEnabled\" :true,\n  \"motoEnabled\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/cancel?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refund (TSYS)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\":5,\n  \"tokenEnabled\" : true,\n  \"motoEnabled\" : false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/refund?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"refund"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sale (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 800,\n    \"cardExpireMonth\": \"12\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Dejan\",\n    \"cardSecurityCode\": \"999\",\n    \"cardNumber\": \"4012000098765439\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"dejan@dejan.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Dejan\",\n    \"customerLastName\": \"Popovski\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 2,\n    \"tokenEnabled\" : false,\n    \"motoEnabled\" : true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/sale?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"sale"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rebill (TSYS)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 800,\n  \"transactionID\": 7,\n  \"tokenEnabled\" : true,\n  \"motoEnabled\" : false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/rebill?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"rebill"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EPX",
+					"item": [
+						{
+							"name": "Authorize (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 3000,\n  \"cardExpireMonth\": \"03\",\n  \"cardExpireYear\": \"2026\",\n  \"cardHolderName\": \"Dejan\",\n  \"cardSecurityCode\": \"123\",\n  \"cardNumber\": \"4111111111111111\",\n  \"clientOrderId\": \"100\",\n  \"currency\": \"USD\",\n  \"customerAddress\": \"Skopje\",\n  \"customerCity\": \"Skopje\",\n  \"customerCountryCode\": \"US\",\n  \"customerEmail\": \"dejan@dejan.com\",\n  \"customerIp\": \"123.123.123.123\",\n  \"customerName\": \"Dejan\",\n  \"customerLastName\" : \"Popovski\",\n  \"customerPhone\": \"+3123123112312\",\n  \"customerState\": \"Mkd\",\n  \"customerZipCode\": \"1000\",\n  \"midId\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/authorize?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Capture (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 3000,\n  \"transactionID\": 62\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/capture?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"capture"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sale (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"cardExpireMonth\": \"02\",\n    \"cardExpireYear\": \"2025\",\n    \"cardHolderName\": \"Dejan\",\n    \"cardSecurityCode\": \"244\",\n    \"cardNumber\": \"5000000000000009\",\n    \"clientOrderId\": \"100\",\n    \"currency\": \"USD\",\n    \"customerAddress\": \"Dzumajska\",\n    \"customerCity\": \"Skopje\",\n    \"customerCountryCode\": \"VA\",\n    \"customerEmail\": \"dejan@dejan.com\",\n    \"customerIp\": \"123.123.123.123\",\n    \"customerName\": \"Dejan\",\n    \"customerLastName\": \"Popovski\",\n    \"customerPhone\": \"800-1234567\",\n    \"customerState\": \"VA\",\n    \"customerZipCode\": \"85284\",\n    \"midId\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/sale?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"sale"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refund (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\": 65\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/refund?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"refund"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/cancel?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cancel"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Rebill (EPX)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"amount\": 100,\n  \"transactionID\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/rebill?_csrf={{csrftoken}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"rebill"
+									],
+									"query": [
+										{
+											"key": "_csrf",
+											"value": "{{csrftoken}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Search Transctions",
+					"item": [
+						{
+							"name": "Find Transaction",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/transaction?id=25",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"transaction"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fromDateTime",
+											"value": "2021-11-09 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "toDateTime",
+											"value": "2021-12-11 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "200",
+											"type": "text"
+										},
+										{
+											"key": "transactionType",
+											"value": "AUTHORIZATION",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/export",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"export"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Search Orders",
+					"item": [
+						{
+							"name": "Orders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fromDateTime",
+											"value": "2021-01-01 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "toDateTime",
+											"value": "2022-01-01 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "200",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/orders",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order (ID)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/order",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"order"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CSRF",
+					"item": [
+						{
+							"name": "CSRF",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/csrf",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"csrf"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Backoffice [Cognito Authentication]",
+			"item": [
+				{
+					"name": "Bacoffice Transaction Operations",
+					"item": [
+						{
+							"name": "Capture",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 1800,\n    \"transactionID\":9\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/capture",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"capture"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\":1,\n  \"settlementAmount\":\"300\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/cancel",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refund",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transactionID\":5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/refund",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"refund"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Backoffice Search Transctions",
+					"item": [
+						{
+							"name": "Find Transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/transaction?id=25",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"transaction"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Export",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fromDateTime",
+											"value": "2021-11-09 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "toDateTime",
+											"value": "2021-12-11 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "200",
+											"type": "text"
+										},
+										{
+											"key": "transactionType",
+											"value": "AUTHORIZATION",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/export",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"export"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Backoffice Search Orders",
+					"item": [
+						{
+							"name": "Orders",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fromDateTime",
+											"value": "2021-01-01 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "toDateTime",
+											"value": "2022-01-01 00:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "pageSize",
+											"value": "200",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/orders",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order (ID)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/order",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"order"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MID",
+					"item": [
+						{
+							"name": "All MIDs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiOWVmMjE3ZDMtMDFkOS00N2Y5LWE5N2YtNjcxODI0MTA2M2Y4Iiwic3ViIjoiMDIyOTdjMGYtYmE3Zi00MGQ3LWEyN2QtYTVlOTM4OWEwOWEwIiwiZXZlbnRfaWQiOiI3ODNlY2I2Yy1mMTFhLTRiMDQtOTk1ZS0xYTY3NTE5ZmU0NjIiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4NzE3NTIwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDg3MjExMjAsImlhdCI6MTY0ODcxNzUyMCwianRpIjoiNDRlYzAxNTctNzRhYS00MWIyLThhM2EtMjFmNDUwYTJlNTY5IiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6ImRlamFuMiJ9.lYB9oPGahWvNdNDJN5N4gm6qwwMhxU3Jiz8P7Agf-w43WDSm_Xbi__5XBVSwD_0r8QbBvRG5-Rk9wN6ryf8sRcUrTl6h5a7bs0yp6aIJDq05bXD_sWxN1Ceoe04CZToISG9otia8GbgCl_WYM_OoQg0LbGps3BowemhDlQbtPbD_yUyuQiHsWi9KrJzg5XGBuxFOFCrzyIKxzzkBv3457O2xZyH1xDnZKt1LRok1iE58ZxTnJ209cohgwBaHemrXnb68S_KwqWTp7EdAa7gv6fDOsE05rUpVzEmW-6WVa2H03WAPHEF_bZBmwGBXh7OGTmMu8IVE3Bn0ERIWRO8cOg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/mids",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"mids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete MID by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiOWVmMjE3ZDMtMDFkOS00N2Y5LWE5N2YtNjcxODI0MTA2M2Y4Iiwic3ViIjoiMDIyOTdjMGYtYmE3Zi00MGQ3LWEyN2QtYTVlOTM4OWEwOWEwIiwiZXZlbnRfaWQiOiI3ODNlY2I2Yy1mMTFhLTRiMDQtOTk1ZS0xYTY3NTE5ZmU0NjIiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4NzE3NTIwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDg3MjExMjAsImlhdCI6MTY0ODcxNzUyMCwianRpIjoiNDRlYzAxNTctNzRhYS00MWIyLThhM2EtMjFmNDUwYTJlNTY5IiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6ImRlamFuMiJ9.lYB9oPGahWvNdNDJN5N4gm6qwwMhxU3Jiz8P7Agf-w43WDSm_Xbi__5XBVSwD_0r8QbBvRG5-Rk9wN6ryf8sRcUrTl6h5a7bs0yp6aIJDq05bXD_sWxN1Ceoe04CZToISG9otia8GbgCl_WYM_OoQg0LbGps3BowemhDlQbtPbD_yUyuQiHsWi9KrJzg5XGBuxFOFCrzyIKxzzkBv3457O2xZyH1xDnZKt1LRok1iE58ZxTnJ209cohgwBaHemrXnb68S_KwqWTp7EdAa7gv6fDOsE05rUpVzEmW-6WVa2H03WAPHEF_bZBmwGBXh7OGTmMu8IVE3Bn0ERIWRO8cOg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/mids/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"mids",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create MID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5YTk3MDNlMS1kZTFmLTRlNTgtOWI0Zi0wYjgwZjgwMWEwNzciLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI0Zjk0ZDE2Ny04NzFlLTQ2OGQtYTA3NC1iZTM3NjljYmFiOGUiLCJldmVudF9pZCI6IjJlNzY5NDM0LWYxOWYtNDJiNy1hZWM1LTllMTE4OWZjZDAyOCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTIzNTM0NTYsImV4cCI6MTY1MjM1NzA1NSwiaWF0IjoxNjUyMzUzNDU2LCJqdGkiOiI2OTcxNWY3Ny03YzNiLTQyNDEtYTU4Ny0wZGNkM2UyZGM4MjQiLCJ1c2VybmFtZSI6InZhbHVlbWVudG9yX2FkbWluMiJ9.fYpt62vocBsCAGvW17pAPSWGR9SM4X3QWNZf5QQdjvCiQ1WSdqqmzVZU2TkP4xu1400LIXrw4C6frgMU0xVABwdJEDP3XzNmMrkmM6f5SpIIciQ6xjJaUMVMcgc3qTujmUHz6Ch4chfm72rhsOdTgOv9gFHtEQ2hVldHNJONXVu_BQUnBVFoqLhWQ0b6O_Z34i1lKeETqdjCFxfOEBcWYEIvcJl3_omkh4vi4bEjYIb91ui_mq1vzfa93etOL1ptouG2y_cK4xfCLEyk1X_fLwpVp1_qYnkvPVg3Js5okGRMXp5b7wryBShgoQrBniwzmD7aYqjJ7A4SKHUU5VCI_Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountName\": \"test\",\n  \"bankCredentials\": \"string\",\n  \"bankId\": 2,\n  \"clientId\": 2,\n  \"descriptor\": \"test\",\n  \"status\": \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/mids",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"mids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update MID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"accountName\": \"string\",\n  \"bankCredentials\": \"string\",\n  \"bankId\": 0,\n  \"clientId\": 0,\n  \"currencyIds\": [\n    0\n  ],\n  \"descriptor\": \"string\",\n  \"id\": 0,\n  \"status\": \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/mids",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"mids"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get MID by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5YTk3MDNlMS1kZTFmLTRlNTgtOWI0Zi0wYjgwZjgwMWEwNzciLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiJjYmU4MDNlOS00YWY3LTRlODUtYTBhZS02OWY0Y2NkMjUzYzEiLCJldmVudF9pZCI6IjU1NjEyN2Q3LWRjYzctNDE4MC1hYzY5LTlkNWZhYjk1NjA4MSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTIzNjM5MzEsImV4cCI6MTY1MjM2NzUzMSwiaWF0IjoxNjUyMzYzOTMxLCJqdGkiOiI4ZGEwNDBkZC05ZjdiLTQ5OTYtYTI3OS00ODY2MTA5YjdlNzIiLCJ1c2VybmFtZSI6InZhbHVlbWVudG9yX2FkbWluMiJ9.iAxKcmUhKsSl_bqaQrGs4MQ4hTVg0zdbZTjPyx54T7fRs-imodJg8nmSw3JUAcCwh0K9IKrnEosezu0QPT8IjvyFUpYWRnXo6DoM6WtPhR4tE1W3F1pR1SA6pCZpLL-dsqtpSvsESRqDXdmfj7R9gt7eL5eW9yQn1wiQ2rs5uZjiytjQ13P6ihyXrENjZ-8jo_H8uSZIu4Ixe9ks0fyXAjbYPdR7RNEApU3mD_ZEuASQTJyjz-AJhLKFK1dpdQSwtnllGdUzRKifWEh_44L4imU9w46eYZ04YvxEElWcnriy_Ywog_P94_aTZpUP7M9bNoAQ1_4MLNBw9dh0Neh1vg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/mids/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"mids",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MIDs by client",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "dejan",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/midsByClient",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"midsByClient"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "MIDs by client ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiOWVmMjE3ZDMtMDFkOS00N2Y5LWE5N2YtNjcxODI0MTA2M2Y4Iiwic3ViIjoiMDIyOTdjMGYtYmE3Zi00MGQ3LWEyN2QtYTVlOTM4OWEwOWEwIiwiZXZlbnRfaWQiOiI3ODNlY2I2Yy1mMTFhLTRiMDQtOTk1ZS0xYTY3NTE5ZmU0NjIiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4NzE3NTIwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDg3MjExMjAsImlhdCI6MTY0ODcxNzUyMCwianRpIjoiNDRlYzAxNTctNzRhYS00MWIyLThhM2EtMjFmNDUwYTJlNTY5IiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6ImRlamFuMiJ9.lYB9oPGahWvNdNDJN5N4gm6qwwMhxU3Jiz8P7Agf-w43WDSm_Xbi__5XBVSwD_0r8QbBvRG5-Rk9wN6ryf8sRcUrTl6h5a7bs0yp6aIJDq05bXD_sWxN1Ceoe04CZToISG9otia8GbgCl_WYM_OoQg0LbGps3BowemhDlQbtPbD_yUyuQiHsWi9KrJzg5XGBuxFOFCrzyIKxzzkBv3457O2xZyH1xDnZKt1LRok1iE58ZxTnJ209cohgwBaHemrXnb68S_KwqWTp7EdAa7gv6fDOsE05rUpVzEmW-6WVa2H03WAPHEF_bZBmwGBXh7OGTmMu8IVE3Bn0ERIWRO8cOg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/midsByClient/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"midsByClient",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "All Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI5YTk3MDNlMS1kZTFmLTRlNTgtOWI0Zi0wYjgwZjgwMWEwNzciLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiJlMjdjNjE1NS01ZDdkLTQ2MDktOWM5NC1mNmYxY2IwNDM2NGQiLCJldmVudF9pZCI6ImI1ZDU4OTNjLWRmYzQtNDY2Zi04ZDllLWFhMzFhNzBmNTEzMCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTIyNjIwODksImV4cCI6MTY1MjI2NTY4OSwiaWF0IjoxNjUyMjYyMDg5LCJqdGkiOiIzYmZhMDZjMy1jNjU2LTRjNWQtOGUxMC1iNWJmYjBiOGZjMzMiLCJ1c2VybmFtZSI6InZhbHVlbWVudG9yX2FkbWluMiJ9.g1q6vhCrBsfCgeJV0B8RWVlTW2rALaBDnPW68w4R62zlgW2lfULWz_-TNvFkBEUDC-6K2NN6tzUh_i0u6lmbCCrShOzXFY2G8Brl0gh1pi67EWcmk3t2B6cMA90MQUqklCKywP7lOrJ7hSLu3i_yqMDbgZxjqmcwLFQAPXP7G9AM8AUWMt1d-8kEZzjuPGUK9pFgDiQRTAp-zDKUXuIEKd0KISgJhmS5U2RXTkidkcACAAPyELfgAhJOMIp9nxqroYgG4krusz0cEOWe1S9t_lBleCrowSHMSAUjXsqsWvz_OqB2we_YJH3JoxanFTjcewpjecyXX9tj2ngSj2JIUg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/users/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n    \"userName\":\"dejan2\",\n    \"password\":\"dejandejan\",\n    \"status\" : \"ACTIVE\",\n    \"client\" : 1,\n    \"roles\" :[\"merchantUser\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/users/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"24\",\n    \"userName\" : \"dejan2\",\n    \"password\" : \"dekodeko\",\n    \"status\" : \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/users",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sign in",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userName\" : \"valuementor_admin2\",\n    \"password\" : \"K8zPB#M3Sz70T&ig%S\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/users/sign-in",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users",
+										"sign-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Log out",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJiYTUwZTEzZi0yMzczLTQzYzEtOWE1NC0wMDBhYTk1ZGIzYjQiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiJjNzg5NTlhZC1hMTdiLTQ5YzktODNiNi05ZTMyNDBiMDQ1NWYiLCJldmVudF9pZCI6Ijk0MDQ2OGEzLTg0YWEtNDQyNC05ZmI5LTRlNmZmZmMzMTZlMSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NTI3Nzg1NjUsImV4cCI6MTY1Mjc4MjE2NSwiaWF0IjoxNjUyNzc4NTY1LCJqdGkiOiIxM2JhNzBhOS0yOTkzLTRjNjQtYWE5OS00NTFlZjdkOWRjZWUiLCJ1c2VybmFtZSI6Im5ldHZhbHZlX2FkbWluIn0.sGFhD0YYsI2YUdHUV_MSPfjg5ZnO5DcKC0OyJppAteksXnHX3jOA6MZIyhkf8rqwMJ7Sg9lKra7l6xYcvi6NHFeHcegR6T7zlApOXR0CytE15uT0dt8QUhL-DVcPirFDzh-RGkyY4eeUwjIE-J49jhQ9kTj64IygTLIShM7r2QTwtXd5zXOfEqoODO6FLy9PJq0zTYuV6ASsOTDuIVuwPQ8cqZYFwI8Eyw1nLkTx48PsYW6Ohbo9XrdHBKPyx22gfN6avHy4UlS1abNBF3-OBcW8JgbTzSKX3MYwfovvS3eSv7PvfBm0LMukIMVnIORjVVcGbnqcMgJAVeV50D3rSA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refreshToken",
+											"value": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.QN_fExJkIyr9M_Tp6HPi5e346Paho7iWsO_BCbNiCcDZvYeFsOjD3w_DBRQvlfBseDBzeB7x3ioz7lwn_JWiKVyO8fh9KRPQUxMU8Dc7__B6lUZt1Gke_yr3-uwqcRDlhOcNN8gsy_pjR394P2L0L0SWLOaY1N6HVc8iltOlk-UtT2-I1u0iHZATlayBhpdaGvHav-6kURQ01Z-P7mpXySyqa1cF7AOl0KMWokjDTBUCYXooNMjga7kkImUOouBDmqDHCvJYFjE02JSqL1igGYX8EVoXxYr3ZGOpgoNVNzY_lLgDf6YkhoF_bhwBUDluQ66VKJK9oE2UoCbvNCVcGQ.1ysIjrCdDPcDoB1K.AfRGNbzBf9OeAVsfrPLB6IhnIN6vxLPQvcIdpSr07VrDSIQ0m0PsyF8FPcK_MT3zXHpm3HNf2rRpEUKboOGiLTij04IV_mNzXnrzh1YX8HV_xPUkfjV5mB2X-v29MFA3ZmCkpOsSavkuJGV_uK1STCNzhya2LDnLpIgXuYSNZD9DmsZOOj1DgbMiYqCpNecouKcG4UE9nEWJyJTf1-JBgWASyd_BG_wKyCgr9uddPB-O1YcfyC9Yflg9t_bGjmYXAX--r9h_kLxF28k9EKKYXXsbJBx4VR2D8MbFGb5PYxvyxi61TYfTZpQO8t3HFXkLnI_50MeJkrgWznGXet_J4US34V1Z1VU0xIUAN97EfFCVtdYBX2TSIpRc4gQOJ1F7JH4AjuF-Qn8hlwZI1Rh70WHJiHXs66KuodY2v0ooKdfkmeubi6-qcq27bI1B5VOHJFwn71UaPYYyK5n8NiXpJmkyzcMcGLhdr_261ukRJvL--0RD7twoYQniVndqzjAG9VK4g1u2-ePFsjaDofa7nMdpTpbsq-ZmQPLydPVXhS_9iK5UbqL3JGmdYMROGK3Sox7dM_O6Vt7_oMjZFY8D0WdtpOht2SaQURlyy-9S-GIQh8Mu_149C_I-MRJdh1kzCAHjzHgAXxUQeX8lkgexz51sdEThncW0NVGISJY5XSiHq6sqghdAKZyEbb_SSAdbZNez-yNiu9r_5_zvOBc24BRWynQauXxCuTlKFkiyPbZW8n9VfbXdSNAQmZ87dV3x7QIWsHr2_znoNbvmE7770U5Swpj8j6uauEaF2X12hJSqbQXZaXNI-BvzTmejtuug3G9v_Lw5XH3ylPaoTzFClRgr0AlySi85GXBlRy-xMnBTsZEkNvXTtKv-vCjev_ohqzGQ9yoIb-txTzHbXzbPS7L3TOGlrrMZeQ1c7yNmfxnwqFB-6vKVoAW1zyutNm14SFp620MqjV7q5F_2XAl4Bc2Djs-HaTA3JlchtJ0ptpeG_LmADvg8tUtbEQ50yg4cLwCYWrnT0NgAUNQvAtDDktAg3SYqsnD2V2s-jqgo0FiP7t51YNB93WwILb-kVo6GqrskLIrsSYFaszqFlkSa2V-h5HrycXsFdKowpJDNCgKmqK9tZ6QQc_QmkmZT2pXTnAkQ4q5QzrfABosPvl3Su82SRHabb3iq0c4bKVTffDD5iEYvAOL3oi8opTCCuwi1QLO7MPFh3qPBkR1meVN2MuTu1ODSxe913CZz29xXKkkI4nOioNE-PU6DhMQXXurIGtTTAFjwW7YE_D811Bo.rw1YIekD5oFTDtXXjwvruw",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/users/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"users",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Clients",
+					"item": [
+						{
+							"name": "All Clients",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiNmI1ZDIwMjYtNDY3NS00YjA3LWI1ZTUtZDJmN2Y0OWEyZTUxIiwic3ViIjoiMWM4Y2U5ZGQtMzUwMi00ZjE3LWE4NzUtMjFjOTk5ZjkyYjRlIiwiZXZlbnRfaWQiOiJjYmU2NWRmYS01YWQ4LTQyNDctYWJhNC1hYmUzMjUwNTY1YzAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4MDQxODI3LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDgwNDU0MjcsImlhdCI6MTY0ODA0MTgyNywianRpIjoiMTk3NmNhNTAtYjM2Mi00YzdhLTk1MjQtNTlhZTQyYzliNzFiIiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6InRlc3Q1In0.G_T_ZqR54kyVbEpnMk9KrlHJ3O82OqguOQkdrtgEWbdrq52h-6XCh-spFk_TLBuyTKV--VG3T9T78fZieS80NPLXeBt9b7nR--GQIWJB7n0M1_viBSOYnHIAU103e_CA5yXWiy9cLm7qDr6akYVIlCCTuqqSoH9nHAuB5duppm0SXZGYrN9K-ATTxVshvNiCmZftIYXUblZrV4qq8dN3GxgMxzyNxpImEDIf4I_fu2KzmQ__amQ1nc5vGSiPHVgPzlXVndyeVI8nziCpYcEdLpWI2gy_LmsFktAQHgp88xU6lIeFjsA0t-B2YIhIOhsbkGdeljP1iLE6OEt9RAZtWg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/clients",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Client by ID",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiNmI1ZDIwMjYtNDY3NS00YjA3LWI1ZTUtZDJmN2Y0OWEyZTUxIiwic3ViIjoiMWM4Y2U5ZGQtMzUwMi00ZjE3LWE4NzUtMjFjOTk5ZjkyYjRlIiwiZXZlbnRfaWQiOiJjYmU2NWRmYS01YWQ4LTQyNDctYWJhNC1hYmUzMjUwNTY1YzAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4MDQxODI3LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDgwNDU0MjcsImlhdCI6MTY0ODA0MTgyNywianRpIjoiMTk3NmNhNTAtYjM2Mi00YzdhLTk1MjQtNTlhZTQyYzliNzFiIiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6InRlc3Q1In0.G_T_ZqR54kyVbEpnMk9KrlHJ3O82OqguOQkdrtgEWbdrq52h-6XCh-spFk_TLBuyTKV--VG3T9T78fZieS80NPLXeBt9b7nR--GQIWJB7n0M1_viBSOYnHIAU103e_CA5yXWiy9cLm7qDr6akYVIlCCTuqqSoH9nHAuB5duppm0SXZGYrN9K-ATTxVshvNiCmZftIYXUblZrV4qq8dN3GxgMxzyNxpImEDIf4I_fu2KzmQ__amQ1nc5vGSiPHVgPzlXVndyeVI8nziCpYcEdLpWI2gy_LmsFktAQHgp88xU6lIeFjsA0t-B2YIhIOhsbkGdeljP1iLE6OEt9RAZtWg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/clients/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"clients",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiNmI1ZDIwMjYtNDY3NS00YjA3LWI1ZTUtZDJmN2Y0OWEyZTUxIiwic3ViIjoiMWM4Y2U5ZGQtMzUwMi00ZjE3LWE4NzUtMjFjOTk5ZjkyYjRlIiwiZXZlbnRfaWQiOiJjYmU2NWRmYS01YWQ4LTQyNDctYWJhNC1hYmUzMjUwNTY1YzAiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4MDQxODI3LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDgwNDU0MjcsImlhdCI6MTY0ODA0MTgyNywianRpIjoiMTk3NmNhNTAtYjM2Mi00YzdhLTk1MjQtNTlhZTQyYzliNzFiIiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6InRlc3Q1In0.G_T_ZqR54kyVbEpnMk9KrlHJ3O82OqguOQkdrtgEWbdrq52h-6XCh-spFk_TLBuyTKV--VG3T9T78fZieS80NPLXeBt9b7nR--GQIWJB7n0M1_viBSOYnHIAU103e_CA5yXWiy9cLm7qDr6akYVIlCCTuqqSoH9nHAuB5duppm0SXZGYrN9K-ATTxVshvNiCmZftIYXUblZrV4qq8dN3GxgMxzyNxpImEDIf4I_fu2KzmQ__amQ1nc5vGSiPHVgPzlXVndyeVI8nziCpYcEdLpWI2gy_LmsFktAQHgp88xU6lIeFjsA0t-B2YIhIOhsbkGdeljP1iLE6OEt9RAZtWg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/clients/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"clients",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiNWM2M2ViMGMtM2NiOC00ZmYzLWI4ODMtZjdiOWQ4Yzg2MTYwIiwic3ViIjoiYWQ1NjA5YzItZTUwMi00NzgxLTlmMWYtMDFjMTA4ZjU4NGQwIiwiZXZlbnRfaWQiOiJhMzJiZWRhOS02ZmM0LTQ0MDYtYWZkYS1kN2U0ZGIyYjRlZWEiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4NzE3MzkwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDg3MjA5OTAsImlhdCI6MTY0ODcxNzM5MCwianRpIjoiZjNmNmE3YWEtMWIzZi00NzA0LWIzZGItODU2ZTgyNjhlZjMxIiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6ImRlamFuIn0.IugZDegLCMbqdRd9Kdved-XVAy9X5PozEV4FBbGahPWJ-GnP000eiE6rQxDOX7Qnklcyck_yXKGqS6-mcq6q9JHhYHGo4tZGGCyGl3MzZY-5KaM2rSzcoZJXDp5XtQ9e0jsEjWXGW1qI0RktgarNDUKQfpjDGJU02Cnhnq1FPgTRxuDavxBRtOnY758NvuuvFh9jLRH3dYOzaPJgPUQMU9v2E0LYDRCLEZ43gZGslzuAtMaBpoQ7-74xn9INX_q9VccGyijS2aIdesN13H2iNA68hZrh4RLSiquXyNvjUP0NK_DV7phiMgglVS8BL7_ABSWtHsro4TpT3KNZ4bNEkg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n    \"userName\":\"dejan2\",\n    \"password\":\"dejandejan\",\n    \"status\" : \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/clients/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"clients",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJvcmlnaW5fanRpIjoiM2JhOGRmN2QtYjI0Mi00ZDgzLTk3ODgtYzNhYzI5ZTdlYzVhIiwic3ViIjoiYWQ1NjA5YzItZTUwMi00NzgxLTlmMWYtMDFjMTA4ZjU4NGQwIiwiZXZlbnRfaWQiOiI3MmM3MDU3My0yZDA0LTQ4MWMtODA0ZC1mNGM2OTliZWUyNTgiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ4NzE1OTAyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJleHAiOjE2NDg3MTk1MDIsImlhdCI6MTY0ODcxNTkwMiwianRpIjoiNDEwZGQ0OTMtOWVlNy00M2Y2LWExYmUtYTVhOTA2NzZjY2I4IiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJ1c2VybmFtZSI6ImRlamFuIn0.WYdiBQLae_xjMDQc6NVcd2yVAC75uA88HlEWitWa0GQOqSfs7ftuQJnr-m-qbvkJh96OJWeWU-RrOexrkc8hXaVXIuD5W7Izwz7kgjLDNOV83XGfImQnMqUFQOfHUOKyYQbY3Nu_ywX3qo477G-VGk5CsgBmNxM7taoaGC7e_-hcgMm6aRvhhrv6VsFt5B2hfW4Y4rCMnEXh8_bpYdn75398v0PQopRkeUC_nE_AvHIMyJkqJ4YNifa9OnkuGTbXlpdBPBwuQHv-ZsT1AzgrB5YKXA0_Nlt_rJWLSAemwXHUq2IQJL3CWcOReH4y_wj9tLDg_gg5JCIQelNC1cXrcA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "{{csrftoken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"24\",\n    \"userName\" : \"dejan2\",\n    \"password\" : \"dekodeko\",\n    \"status\" : \"ACTIVE\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/backoffice/clients",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Banks",
+					"item": [
+						{
+							"name": "Banks",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJjOTdkY2IzMC1mOGUyLTQyOWMtYTI2Ny0wNDU0YmJhNTg2ZjciLCJjb2duaXRvOmdyb3VwcyI6WyJtZXJjaGFudFVzZXIiXSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfc1ZzbGVhdTNuIiwiY2xpZW50X2lkIjoiM3BidmF0bmRlMXB1Ym90M2UxbHZoOXE4ZjMiLCJvcmlnaW5fanRpIjoiZTZlOTI5ZGYtOGQ3Ni00M2FlLWFiYzQtYmE1NjY2MTkwYjBkIiwiZXZlbnRfaWQiOiI0NDFlOWY2NS1mYWM4LTQ4OWYtYTJjYy04MTdmMDIxNDE4OTEiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjQ5ODQxMDAwLCJleHAiOjE2NDk4NDQ2MDAsImlhdCI6MTY0OTg0MTAwMCwianRpIjoiZWViNTBmYjYtNTUxMC00OGE5LTljZjQtYmFmMWM2MzYxYzA5IiwidXNlcm5hbWUiOiJlbGkifQ.oaUYHr7C7oKCwyD9FyMWPKpkInT3KA3Wa7q-59zZeN9O5VPvgagd9-t-VHvqHi4lc6wx7FyJnYwfQ55XcxqUofCRDVXgY_o13fBP-ug40eFZZ3oOH-vEemxz7szbIjUdSU_wuldvTYmJYK9GEwwhTPJml2xaxezsOLg_0Evi_Bn7lvQRZ0qh4zncD1vAD_JRfOMIgKKuoGKJxPfGejFZnTQtGaOEndxIyLQHPdKd7PzIsu6PQH_Rod17jhieaEtvBgZQ5S3s9NQOjLKB9EYwvH-cclFUmF83pfr2md85ApYKz7rEKEwGUEtTPhBH_GWM1n50gH5BNI0cNTsAo4dO-w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/banks",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"banks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Currency",
+					"item": [
+						{
+							"name": "Currency",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimdanimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/currency",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"currency"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GenKey",
+					"item": [
+						{
+							"name": "GenKey",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiI1NjZlMGMyZS00ZjgzLTRjNmQtOTJmNy1jYTZhM2MxYTVkYTAiLCJldmVudF9pZCI6IjE5Yjg1NjM3LTZhYzQtNDJmMi1iYjlkLTFlYWIyZmE1NWQwOSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDQ4MDAsImV4cCI6MTY0OTk0ODQwMCwiaWF0IjoxNjQ5OTQ0ODAwLCJqdGkiOiJhNmYyZDJlNi01MTRkLTQzN2ItOGY2MS1hMWI1ZTA2YTE3YTMiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.JXtgnv5ftge_gZqm8LYT1e-7tAYQ0GZBzDUK6dvteW0qXLCsQ8T5BhOaqPaLXHCtVZiMBBIGPIwGa1dGAH1u-8NQltbZeBAO7LNWnY0-wPEmdaie6Xgy5NeelxpT2tmjQENCL_pQlq46IoQFzmp3BUU_rMOLXzUYOLkD-48cXaZFC6SPftpMxcNVwRNFPd-TM92tcXwf1YtBj6lm1pSPEIpAG0w1fJpl_LgxFgVEHR0XBUzwwnZjGvjs8RmWP3LoJe3Xkyuky24u5K-VibSnsaEF7aoffvPOv_tS1BtRV1Lmc8dbi9VbVJs0aS6mflsuScSbBAI5Px2RjpPDhJKFog",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/requestGenkey",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"requestGenkey"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "System Implementation",
+					"item": [
+						{
+							"name": "System Implementation",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimdanimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/implementations",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"implementations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "System Implementation by ID",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "nimdanimda",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/backoffice/implementations/fields/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"backoffice",
+										"implementations",
+										"fields",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actuator Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiI0SDhtM2ljUW9xaWpJOHR0UGRIZ0Q2dDlCNXZFOEZ2OWhKam1TUVVKb1pBPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJkMjdlYWQ4OS1iZjM5LTRhYTEtYmJkZi1jNmE0ZTRkYTNhZTgiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjbGllbnRfaWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsIm9yaWdpbl9qdGkiOiIwNjA1MDI5MS0xODUzLTRhODUtYTVlZS1iYjNmZDJiNmI5NGQiLCJldmVudF9pZCI6IjMwYzQzMjkwLTVhOWQtNGNhZi05OWIzLTY2MTgyODAyNDg3ZSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2NDk5NDYyNTQsImV4cCI6MTY0OTk0OTg1NCwiaWF0IjoxNjQ5OTQ2MjU0LCJqdGkiOiJlYmY1NjhmZS02MDEyLTQ2MWEtOThlYS00MjQ3NDgzNjQxZjQiLCJ1c2VybmFtZSI6InRlc3RhZG1pbiJ9.kJ2QGYcmBfOC6eagLZR-2puk5ys3TsQvhTuLht3NRnu2n0EQUTpmHh2udEJtCoQ3TkV-t1hNIAPWYIWegKCu9776NEDOg1dWcyKhithyMilzMKJVx_nAB5RaqP8eBL1Kfv-TrLmhHfv4MEMqlHd5BJvKipUNZrsYvw6AH-VOmI8FNqVkAVZGbh8gJNfDmkLVvVntq2iU19zejppOCFoTsOz1fDBx8otuAmUCnm3HxNh05KktFztf9vhSpUAUj2kfF09uOSc064BHeVWsbP_vcvViJjZ9mfTdjfmBv_c8XkNAa7sK7r2MLyTKZ005coGG0o5eaKeJI2dBnpNDZ3Et7Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/actuator/info",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"actuator",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var xsrfCookie = postman.getResponseCookie(\"XSRF-TOKEN\"); ",
+					"if(xsrfCookie!=null){",
+					"console.log( xsrfCookie.value);",
+					"postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);",
+					"}",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "csrftoken",
+			"value": "{{csrftoken}}"
+		}
+	]
+}
