@@ -1,0 +1,3572 @@
+openapi: 3.0.1
+info:
+  title: API Documentation
+  description:   |
+
+    
+    **Role-based Access Control**
+    
+    The following table contains the information on which role has the permissions to execute the various sets of API endpoints covered within this document.
+
+    | API Endpoints |Admin | Merchant |
+    |------------|-------------|-------------|
+    | Authentication | ✔ | ✔
+    | User Management | ✔ |-
+    | Banks | ✔ |-
+    | Currency | ✔ |-
+    | Orders |-| ✔ 
+    | Client Management| ✔ |-
+    | Merchant Management| ✔ |-
+    | Gen Key | ✔ |-
+    | System Implementations | ✔ |-
+    | Transaction Management|-| ✔ 
+    | Backoffice Order | ✔| - 
+    | Backoffice Transaction Management | ✔ |-
+   
+  version: 1.0.0
+servers:
+- url: https://api.uat.sandbox-netvalve.com/
+tags:
+- name: Authentication
+  description: |
+    To authenticate and run the payment gateway API endpoints, follow the steps below:
+      1. Locate the the `POST /backoffice/user/sign-in` endpoint.
+      2. Hit the **Try it out** button.
+      3. Enter user name
+      4. Enter password
+      5. Hit the **Execute** button.
+      
+      Upon successful authentication, an access/bearer token will be generated. Copy this token and pass it on as the auth header to successfully run the endpoints.
+
+    > ### Note: 
+    > The bearer token is valid for 60 minutes only.
+    
+- name: User Management
+  description: Manage backoffice users accounts within the system
+- name: Banks
+  description: Access bank details
+- name: Currency
+  description: Access currency details
+- name: Orders
+  description: Fetch information of all types of orders
+- name: Client Management
+  description: Manage client accounts in the system
+- name: Merchant Management
+  description: Manage all merchants in the system
+- name: Gen Key 
+  description: Manage Gen Key
+- name: System Implementation
+  description: Fetch information about the system implementation
+- name: Transaction Management
+  description: |
+    Manage transaction operations for client orders
+- name: Backoffice Order
+  description: Access backoffice order details
+- name: Backoffice Transaction Management
+  description: Manage backoffice order-based transaction operations
+paths:
+  /backoffice/users/sign-in:
+    post:
+      tags:
+      - Authentication
+      summary: Sign in to the system
+      operationId: sign_in
+      description: |
+      
+       This endpoint allows the user to sign in to the system. 
+       
+       It generates a bearer token as a 200 response that can be used to run other API endpoints successfully.
+
+       ### Prerequisite
+       
+          This endpoint can be executed by the following user accounts: 
+          * Admin
+          * Merchant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTSignInOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Logged in successfully
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSTSignInResponseBody'
+        403:
+          description: Required Parameter is missing
+  /backoffice/users/logout:
+    post:
+      tags:
+      - Authentication
+      summary: Sign out of the system
+      security:
+        - BearerAuth: []
+      operationId: sign_out
+      description: |
+       This endpoint allows the user to sign out from the system and end the session.
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.
+
+        * This endpoint can be executed by the following user accounts: 
+          * admin
+          * merchant
+          
+      parameters:
+        - in: query
+          name: refreshToken
+          description: Specify the refresh token of the user. To fetch this value, refer to the response of `POST /backoffice/users/sign-in`.
+          example: DYzNy1iODM3LTQ5NTItYmU0Yy1mMWM3Y2YyNjU2NDQiLCJjb2duaXRvOmdyb3VwcyI6WyJhZG1pbiJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9zVnNsZWF1M24iLCJjb2duaXRvOnVzZXJuYW1lIjoidW1lcl9hZG1pbiIsIm9yaWdpbl9qdGkiOiJkMTNjYjg0MC02NTVmLTQ3NTEtOTRmYy02MjcxNTQyN2EwYTYiLCJhdWQiOiIzcGJ2YXRuZGUxcHVib3QzZTFsdmg5cThmMyIsImV2ZW50X2lkIjoiNjVlOTY3OWYtYmRmMi00NTJmLTljYTgtZDYyYzU4Yjg1NmFkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NjI5NjAzMTUsImV4cCI6MTY2Mjk2MzkxNSwiaWF0IjoxNjYyOTYwMzE1LCJqdGkiOiJhYjlmMzVkYi00YTlkLTRjYjMtYjhkOS1jMmQzZmU1Mzk1ZDAifQ.w20jr3wjSowfO31dn5iEJXv8UNCw0Y9-uEsntvvPIwYiL7ZutZ0GVtDbUnOba_KxAhLhd7Cn_EiWxDmNt4ze79ie767CIPd3-oO_Wh8Ryp-IsTKwyQF1WTCuclFsOjl--v3GX4liMqBlifAZKFGrQLrwxKWKk_iRTiKtOwcisFZ9lsUOcCud_ThbZyYXqG1zYR6mOXH8GNzXVVd578cHv7L7X6B7ahm2FGNsN4RnBY-zhguObW2OtXdQZsxLi_4batuUo_o6y6I6gYb2ccX35tbC3XnwBLFoteVkzYCVQHPyjr-3IjeU_K5YUCCq6LRbZRrKtNV4Lf0ifGJkBA1Ca
+          schema:
+            type: string
+      responses:
+        200:
+          description: | 
+          content: 
+            application/json:
+              schema:
+                  type: object
+                  example: true
+                  description: The user was able to successfuly sign out.
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid.
+            * **Full authentication is required to access this resource:** Please recheck the authentication method you are using. Bearer token must be used for authentication. 
+  /backoffice/users:
+    get:
+      tags:
+      - User Management
+      summary: Fetch all backoffice users in the system
+      security:
+        - BearerAuth: []
+      operationId: fetch_all_backoffice_users
+      description: |
+       This endpoint returns the following user details within the system:
+       
+       * User ID
+       * User Name
+       * Status
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+        
+      responses:
+        200:
+          description: Successfully fetches all backoffice users.
+          content: 
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GETUsersResponseBody'
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid.
+            * **Full authentication is required to access this resource:** Please recheck the authentication method you are using. Bearer token must be used for authentication. 
+  /backoffice/users/{id}:
+    get:
+      tags:
+      - User Management
+      summary: Fetch the backoffice user from the system by ID
+      security:
+        - BearerAuth: []
+      description: |
+       This endpoint returns the following backoffice user details for a particular user within the system:
+              
+        * User Name
+        * Status
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication. 
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+
+      parameters:
+        - in: path
+          name: id
+          description: The backoffice user ID. To fetch this value, refer to the response of `GET /backoffice/users` endpoint.
+          example: 46
+          schema:
+            type: integer
+            example: 2
+          required: true
+      responses:
+        200:
+          description: Successfully fetched backoffice user details by ID.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        description: The backoffice user ID.
+                      userName:
+                        type: string
+                        example: Ayesha
+                        description: The backoffice username.
+                      status:
+                        type: string
+                        example: ACTIVE
+                        description: The backoffice user status.
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid.
+            * **Full authentication is required to access this resource:** Please recheck the authentication method you are using. Bearer token must be used for authentication. 
+  /backoffice/users/:
+    post:
+      tags:
+      - User Management
+      summary: Add a new backoffice user in the system
+      security:
+        - BearerAuth: []
+      description: |
+       This endpoint adds a new admin or merchant user in the system.
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.   
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTUserOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully added a new user.
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                   type: integer
+                   example: 4     
+                   description: The ID of the newly created user.
+                  userName:
+                    type: string
+                    example: johndoe
+                    description: The username of the new user.
+                  status:                          
+                    type: string
+                    example: ACTIVE
+                    description: The status of the user.
+        400:
+          description: |
+            **Bad Request:** Invalid values have been passed. For more information refer to the request body schema.
+        403:
+          description: Required Parameter is missing
+    put:
+      tags:
+      - User Management
+      summary: Update the user details
+      security:
+        - BearerAuth: []
+      operationId: update_backoffice_user
+      description: |
+       This endpoint updates the admin or merchant user details in the system. The following user details can be updated:
+       * password
+       * status
+
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.   
+        * The bearer token must be generated using admin credentials.
+        * This endpoint can be executed by an admin user only.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTUserOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully updates the user details.
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                   type: integer
+                   example: 4     
+                   description: The updated user ID.
+                  userName:
+                    type: string
+                    example: johndoe
+                    description: The updated username.
+                  status:                          
+                    type: string
+                    example: INACTIVE
+                    description: The updated status of the user account.
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid.
+            * **Full authentication is required to access this resource:** Please recheck the authentication method you are using. Bearer token must be used for authentication. 
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/users/{id}/:
+    delete:
+      tags:
+      - User Management
+      summary: Delete the user from the system
+      security:
+        - BearerAuth: []
+      operationId: delete_user
+      description: |
+       This endpoint deletes a particular admin or merchant user from the system.
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.   
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+
+      parameters:
+        - in: path
+          name: id
+          description: Specify the backoffice user ID. This ID can be fetched using `GET /backoffice/users` endpoint.
+          example: 4
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfully deletes the user
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                   type: integer
+                   example: 4     
+                   description: The user ID.
+                  userName:
+                    type: string
+                    example: johndoe
+                    description: The username.
+                  status:                          
+                    type: string
+                    example: INACTIVE
+                    description: The status of the user.
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid.
+            * **Full authentication is required to access this resource:** Please recheck the authentication method you are using. Bearer token must be used for authentication. 
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/banks: 
+    get:
+      tags:
+      - Banks
+      summary: Fetch all banks in the system
+      security:
+        - BearerAuth: []
+      operationId: fetch_bank_details
+      description: |
+       This endpoint fetches the details of all banks within the system. This includes:
+        * Bank ID
+        * Bank name
+        * Parameters supported by the bank.
+       
+       ### Prerequisite
+       
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only. 
+
+      responses:
+        200:
+          description: Successfully fetches the bank details
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETBanksResponseBody'
+  /backoffice/currency:
+    get:
+      tags:
+      - Currency
+      summary: Fetch all currencies
+      security:
+        - BearerAuth: []
+      operationId: fetch_currencies
+      description: |
+        This endpoint displays all available currencies in the system.
+        
+        ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      responses:
+        200:
+          description: Successfully fetches all currencies.
+          content: 
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GETCurrencyResponseBody'
+  /order:
+    get:
+      tags:
+      - Orders
+      summary: Fetch transaction-based order by ID
+      security:
+        - BearerAuth: []
+      operationId: fetch_order_by_ID
+      description: |
+        This endpoint returns the details of a transaction-based order for a particular order within the system.
+        
+        ### Prerequisite
+         
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by a merchant user only.
+        
+      parameters:
+        - in: query
+          name: id
+          description: Enter the order ID. 
+          example: 563
+          schema:
+            type: integer
+            example: 412
+          required: true
+      responses:
+        200:
+          description: Successfully fetches the order
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    AccountName:
+                      type: string
+                      example: ABC_BANK_CLIENT_C
+                      description: The account name of the bank
+                    OrderID:
+                      type: integer
+                      example: 410
+                      description: The order ID
+                    Amount: 
+                      type: string
+                      example: $98.2
+                      description: The order amount
+                    Status:
+                      type: string
+                      example: ACTIVE
+                      description: The status of the user `ACTIVE` or `INACTIVE`.
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid
+            * **Full authentication is required to access this resource:** Please check the authentication method you are using. Bearer token must be used for authentication.      
+  /backoffice/clients:
+    get:
+      tags:
+      - Client Management
+      summary: Fetch all client accounts
+      security:
+        - BearerAuth: []
+      operationId: fetch_client_accounts
+      description: |
+       This endpoint fetches the following account details for all clients within the system:
+       * ID
+       * Username
+       * Status
+       
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication. 
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only. 
+      responses:
+        200:
+          description: Successfully fetched all clients
+          content: 
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 9
+                      description: The ID of the client account to fetch details.
+                    userName:
+                      type: string
+                      description: The username of the client account to fetch details. 
+                    status:
+                      type: string
+                      description: The status of the client account to fetch details `ACTIVE` or `INACTIVE`.
+
+                  example:
+                  - id: 1
+                    userName: Monica
+                    status: ACTIVE
+                  - id: 2
+                    userName: Ross
+                    status: ACTIVE
+  /backoffice/clients/{id}:
+    get:
+      tags:
+      - Client Management
+      summary: Fetch client by ID
+      security:
+        - BearerAuth: []
+      operationId: fetch_client_by_id
+      description: |
+       This endpoint fetches the following client details for a particular client:
+       * Username
+       * Status
+       ### Prerequisite
+
+        * This endpoint requires bearer token for authentication.  
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only. 
+
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the client to fetch details. To fetch this value, refer to the `GET /backoffice/clients` endpoint.
+          example: 1
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfully fetched client by ID.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        description: The client ID
+                      userName:
+                        type: string
+                        example: Monica
+                        description: The username of the client
+                      status:
+                        type: string
+                        example: ACTIVE
+                        description: The status of the client `ACTIVE` or `INACTIVE`.
+  /backoffice/clients/:  
+    post:
+      tags:
+      - Client Management
+      summary: Create new client account
+      security:
+        - BearerAuth: []
+      operationId: create_new_client
+      description: |
+        This endpoint creates a new client account.
+        ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTClientOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully created new client
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer           
+                    example: 7
+                    description: The ID of the client to create account.
+                  userName:                      
+                    type: string
+                    example: johndoe_5
+                    description: The username of the client to create account.
+                  status:
+                    type: string
+                    example: ACTIVE
+                    description: The status of the client to create account.
+        400:
+          description: |
+            **Bad Request:** Invalid values have been passed. For more information refer to the request body schema.
+        403:
+          description: Required Parameter is missing
+    put:
+      tags:
+      - Client Management
+      summary: Update client details
+      security:
+        - BearerAuth: []
+      operationId: update_client_details
+      description: |
+        This endpoint allows to update the following client account details:
+        * Password
+        * Status
+        ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only. 
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTClientOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully updated client details.
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer           
+                    example: 7
+                    description: The client ID
+                  userName:                      
+                    type: string
+                    example: elipanov
+                    description: The username of the client
+                  status:
+                    type: string
+                    example: ACTIVE
+                    description: The status of the client
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/clients/{id}/:  
+    delete:
+      tags:
+      - Client Management
+      summary: Delete client account by ID
+      security:
+        - BearerAuth: []
+      operationId: delete_client_by_id
+      description: |
+       This endpoint deletes a specific client account.
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.   
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only. 
+
+      parameters:
+        - in: path
+          name: id
+          description: Specify the ID to be delete from the system. To fetch this value, refer to the response of `GET /backoffice/clients` endpoint.
+          example: 35
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfully deleted client record.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 35
+                        description: The ID of the user deleted from the system. 
+                      userName:
+                        type: string
+                        example: usmanali
+                        description: The username of the user deleted from the system. 
+                      status:
+                        type: string
+                        example: INACTIVE
+                        description: The status of the user deleted from the system. 
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/mids:
+    get:
+      tags:
+      - Merchant Management
+      summary: Fetch details of all merchant accounts
+      security:
+        - BearerAuth: []
+      operationId: fetch_all_merchant_accounts
+      description: |
+       This endpoint returns the all merchant account IDs within the system.
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.  
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      responses:
+        200:
+          description: Successfully fetches all MIDs.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETMIDResponseBody'
+                    
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid
+            * **Full authentication is required to access this resource:** Please check the authentication method you are using. Bearer token must be used for authentication.   
+  /backoffice/mids/{id}:
+    get:
+      tags:
+      - Merchant Management
+      summary: Fetch merchant account by ID
+      security:
+        - BearerAuth: []
+      operationId: fetch_merchant_user_by_ID
+      description: |
+       This endpoint returns the merchant account details within the system for a particular ID
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+      
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the Merchant account to fetch. This ID can be fetched using `GET /backoffice/mids` endpoint.
+          schema:
+            type: integer
+            example: 4
+          required: true
+      responses:
+        200:
+          description: Successfully fetched Merchant account by ID.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETMIDByIDResponseBody' 
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid
+            * **Full authentication is required to access this resource:** Please check the authentication method you are using. Bearer token must be used for authentication.   
+
+  /backoffice/mids/users/:  
+    post:
+      tags:
+      - Merchant Management
+      summary: Create new merchant user account
+      security:
+        - BearerAuth: []
+      operationId: create_new_merchant_account
+      description: |
+       This endpoint creates a new merchant user account.
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTMidOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully creates a new merchant user account.
+          content: 
+            application/json:
+              schema:
+                    $ref: '#/components/schemas/POSTMIDResponseBody'
+        400:
+          description: |
+            **Bad Request:** Invalid values have been passed. For more information refer to the request body schema.
+        403:
+          description: Required Parameter is missing
+    put:
+      tags:
+      - Merchant Management
+      summary: Update merchant account details
+      security:
+        - BearerAuth: []
+      operationId: update_Merchant_account
+      description:  |
+       This endpoint updates the merchant account details.
+       * Account Name
+       * Bank credentials
+       * Bank ID
+       * Currency
+       * Client ID
+       * Status
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTMidOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Successfully update MID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PUTMIDResponseBody'
+                
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/mids/{id}/:  
+    delete:
+      tags:
+      - Merchant Management
+      summary: Delete merchant account
+      security:
+        - BearerAuth: []
+      operationId: delete_merchant_account
+      description: |
+       This endpoint deletes the merchant account details within the system.
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.  
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      parameters:
+        - in: path
+          name: id
+          description: Enter ID of the merchant account to delete. This ID can be fetched using `GET /backoffice/mids` endpoint.
+          schema:
+            type: integer
+            example: 4
+          required: true
+      responses:
+        200:
+          description: Successfully deleted Merchant account.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DELETEMIDResponseBody'
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/midsByClient:
+    get:
+      tags:
+      - Merchant Management
+      summary: Fetch merchant account by client
+      security:
+        - BearerAuth: []
+      operationId: fetch_merchant_account_by_user
+      description: |
+       This endpoint returns the following merchant account details within the system:
+       
+       * User ID
+       * User Name
+       * Status
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.  
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      responses:
+        200:
+          description: Successfully fetched MID of current client.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETMidsByClientResponseBody'
+  /backoffice/midsByClient/{clientId}:
+    get:
+      tags:
+      - Merchant Management
+      summary: Fetch merchant account of the client by ID
+      security:
+        - BearerAuth: []
+      operationId: fetch_merchant_users_by_ID
+      description: |
+       This endpoint returns the merchant acount details by ID.
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication. 
+        * The bearer token must be generated using admin credentials.  
+        * This endpoint can be executed by an admin user only.
+
+      parameters:
+        - in: path
+          name: clientId
+          description: The ID of the client to fetch details of the merchant account. This ID can be fetched using `GET /backoffice/mids` endpoint.
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfully fetched client merchant account details by ID.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETMIDSByClientIDResponseBody'
+  /backoffice/requestGenKey:
+    get:
+      tags: 
+      - Gen Key
+      summary: Fetch gen key
+      security:
+        - BearerAuth: []
+      operationId: gen_key
+      description: |
+        This endpoint fetches the gen key from the system
+        ### Prerequisite
+         * This endpoint requires bearer token for authentication. 
+         * The bearer token must be generated using admin credentials.  
+         * This endpoint can be executed by an admin user only.
+      parameters:
+        - in: query
+          name: id
+          description: The Merchant ID of the user to fetch gen key.
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfully fetched gen key results.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      genKey:
+                        type: string
+                        example: []
+                        description: The gen key generated by the system.
+                      id:
+                        type: string
+                        example: 6
+                        description: The backoffice user ID.
+                      midID:
+                        type: string
+                        example: 7
+                        description: The backoffice user merchant ID.
+                      updatedDate:
+                        type: string
+                        example: 2022-09-12T06:48:02.556Z
+                        description: The backoffice user merchant ID updated date.
+  /backoffice/implementations/:
+    get:
+      tags:
+      - System Implementation
+      summary: Fetch all system implementations
+      security:
+        - BearerAuth: []
+      operationId: fetch_all_system_implementations
+      description: |
+       This endpoint returns the following user implementation details within the system.
+       * ID
+       * Name
+       * Fields
+       ### Prerequisite
+         * This endpoint requires bearer token for authentication.
+         * The bearer token must be generated using admin credentials.  
+         * This endpoint can be executed by an admin user only.
+      responses:
+        200:
+          description: Successfully fetched all system implementations.
+          content: 
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: This displays the ID of the client in the system.
+                    name:
+                      type: string
+                      description: The name of the client in the system.
+                    fields: 
+                      type: string
+                      description: The fields of the client acount in the system.
+                  example:
+                  - id: 3
+                    name: Ahmad
+                    fields: client_id, api_key
+                  - id: 4
+                    name: Ayesha
+                    fields: company, contact_name, test_phone
+                  - id: 6
+                    name: Marium
+                    fields: CUST_NBR
+  /backoffice/implementations/fields/{systemId}:
+    get:
+      tags: 
+      - System Implementation
+      summary: Fetch system implementations by ID
+      security:
+        - BearerAuth: []
+      operationId: system_implementation_by_id
+      description: |
+       This endpoint returns the user implementation details by ID.
+       * Fields
+       ### Prerequisite
+         * This endpoint requires bearer token for authentication. 
+         * The bearer token must be generated using admin credentials.  
+         * This endpoint can be executed by an admin user only.
+      parameters:
+        - in: path
+          name: systemId
+          example: 45
+          description: Specify the client ID to display system specifications.
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successfuly fetched all system implementations.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      fields:
+                        type: string
+                        example: api_key
+                        description: The API key of the client with transaction.
+  /transaction:
+    get:
+      tags:
+      - Transaction Management
+      summary: Fetch transactions by ID
+      security:
+        - BasicAuth: []
+      operationId: transaction_by_id
+      description: |
+       This endpoint returns the transaction details within the system.
+       
+       ### Prerequisite
+          * This endpoint requires bearer token for authentication.
+          * The bearer token must be generated using admin credentials. 
+          * This endpoint can be executed by a merchant user only.
+
+      parameters:
+        - in: query
+          name: id
+          description: Specify the order transaction ID. The ID can be fetched using `GET /backoffice/orders` endpoint.
+          example: 67
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Transaction successfully completed.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETTransactionResponseBody'
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /authorize:
+    post:
+      tags:
+      - Transaction Management
+      summary: Authorize the transaction
+      security:
+        - BasicAuth: []
+      operationId: authorize_transaction
+      description: |
+       This endpoint authenticates the transaction within the system.
+       
+       ### Prerequisite
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+
+      requestBody:
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSTAuthorizeOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 424
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The authorization transaction has been completed.
+          
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /capture:
+    post:
+      tags:
+      - Transaction Management
+      summary: Capture order transaction
+      security:
+        - BasicAuth: []
+      operationId: capture_transaction
+      description: |
+       This endpoint captures the transaction details within the system. 
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+        * This endpoint can only be run for transactions that have already been authorized
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTransactionCaptureOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 45
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The capture transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**          
+  /sale:
+    post:
+      tags:
+      - Transaction Management
+      summary: Sale transaction
+      security:
+        - BasicAuth: []
+      operationId: sale_transaction
+      description: |
+       This endpoint returns the sale details within the system.
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTSaleOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 424
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The sale transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**          
+  /refund:
+    post:
+      tags:
+      - Transaction Management
+      summary: Refund transaction
+      security:
+        - BasicAuth: []
+      operationId: refund_transaction
+      description: |
+       This endpoint returns the refund transaction details within the system.
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+        * This endpoint can only be run for transactions that have already been captured or sold.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTransactionRefundOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 45
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The refund transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**           
+  /cancel:
+    post:
+      tags:
+      - Transaction Management
+      summary: Cancel order transaction
+      security:
+        - BasicAuth: []
+      operationId: cancel_transaction
+      description: |
+       This endpoint cancels the transaction within the system:
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+        * This endpoint can only be run for transactions that have only been authorized but not captured.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTTransactionCancelOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 45
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The transaction has been cancelled.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**         
+  /rebill:
+    post:
+      tags:
+      - Transaction Management
+      summary: Rebill order transaction
+      security:
+        - BasicAuth: []
+      operationId: rebill_transaction
+      description: |
+       This endpoint returns the rebill transaction details within the system.
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+        * This endpoint can only be run for transactions that have already been authorized, captured, or sold.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTRebillOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 75
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The rebill transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**          
+  /export:
+    get:
+      tags:
+      - Transaction Management
+      summary: Export all order transactions
+      security:
+        - BasicAuth: []
+      description: |
+       This endpoint returns the export transaction details within the system.
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+      parameters:
+        - in: query
+          name: page
+          description: The order page number to fetch.
+          example: 6
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: pageSize
+          description: The number of orders to be displayed on one page.
+          example: 8
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: fromDateTime
+          description: The start time of the orders to fetch.
+          example: 2022-09-07T13:37:08.155+00:00
+          schema:
+            type: string
+        - in: query
+          name: toDateTime
+          schema:
+            type: string 
+            description: The end time of the orders to fetch.
+            example: 2022-09-08T13:37:08.180+00:00
+        - in: query
+          name: transactionType
+          description: The transaction type of the order to export.
+          example: Rebilled
+          schema:
+            type: string 
+      responses:
+        200:
+          description: Successfully exported transactions.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETExportResponseBody'
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /recurring:
+    post:
+      tags:
+      - Transaction Management
+      summary: Recurr order transation
+      security:
+        - BasicAuth: []
+      operationId: recurring_transaction
+      description: |
+       This endpoint returns the recurring transaction details within the system.
+       
+       ### Prerequisite
+       
+        * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTRecurringOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 424
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The recurr transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /tsysCardAuthentication:
+    post:
+      tags:
+      - Transaction Management
+      summary: Tsys authorize transaction
+      security:
+        - BasicAuth: []
+      operationId: Tsys_authorize_transaction
+      description: |
+       This endpoint authenticates the tsys transaction within the system.
+       
+       ### Prerequisite
+       * This endpoint requires client username and password for authentication. 
+        * This endpoint can be executed by a merchant user only.
+        * Merchant ID must be active.
+      requestBody:
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/POSTtsysAuthorizeOperationRequestBody'
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                    type: object
+                    properties:
+                      transactionID:
+                        type: integer
+                        example: 424
+                        description: The transaction ID of the merchant account.
+                      errorCode:
+                        type: string
+                        example: "000"
+                        description: The code for completion of transaction.
+                      errorMessage:
+                        type: string
+                        example: Transaction successfully completed.
+                        description: The authorization transaction has been completed.
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /backoffice/orders:
+    get:
+      tags:
+      - Backoffice Order
+      summary: Fetch all transaction-based orders
+      security:
+        - BearerAuth: []
+      operationId: fetch_client_orders
+      description: |
+       This endpoint displays all transaction-based orders.
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by a admin user only.
+      parameters:
+        - in: query
+          name: page
+          description: Specify the page number to fetch the orders from.
+          example: 2
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: pageSize
+          description: Specify the number of orders to be displayed on one page.
+          example: 20
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: fromDateTime
+          description: Specify the start time of the orders to fetch
+          example: 2021-09-07T13:37:08.155+00:00
+          schema:
+            type: string
+        - in: query
+          name: toDateTime
+          description: Specify the end time of the orders to fetch
+          example: 2022-09-07T13:37:08.155+00:00
+          schema:
+            type: string 
+      responses:
+        200:
+          description: Orders successfully fetched.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETBackofficeOrdersResponseBody'
+                
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid
+            * **Full authentication is required to access this resource:** Please check the authentication method you are using. Bearer token must be used for authentication.   
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/order:
+    get:
+      tags: 
+      - Backoffice Order
+      summary: Fetch order by ID
+      security:
+        - BearerAuth: []
+      operationId: fetch_order_by_id
+      description: |
+       This endpoints fetches the transaction details for a particular order by ID. It displays the following information about the merchant order:
+        * Order ID
+        * Created Date
+        * Status
+        * Transactions
+        * Order
+        * More information can be viewed from the response body.
+        
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      parameters:
+        - in: query
+          name: id
+          description: Specify the order ID. To fetch this value, refer to the response of the `GET /backoffice/orders` endpoint.
+          example: 405
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Fetches orders successfully.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GETBackofficeOrderResponseBody'
+        401:
+          description: |
+            * **Access token expired**: The token expires after 60 minutes, please generate a new bearer token.
+            * **Unauthorized**: The Bearer token entered is invalid
+            * **Full authentication is required to access this resource:** Please check the authentication method you are using. Bearer token must be used for authentication.   
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/capture:
+    post:
+      tags:
+      - Backoffice Transaction Management
+      summary: Capture backoffice transaction in the system
+      security:
+        - BearerAuth: []
+      operationId: backoffice_order_capture
+      description: |
+       This endpoint captures the backoffice order within the system.
+       
+       ### Prerequisite
+       * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      requestBody:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                    example: 500
+                    description: The amount of the backoffice order to capture.
+                  transactionID:
+                    type: integer
+                    example: 424
+                    description: The transaction ID of the merchant account. This ID can be fetched using `GET backoffice/orders`
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/POSTBackofficeCaptureResponseBody"
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /backoffice/refund:
+    post:
+      tags:
+      - Backoffice Transaction Management
+      summary: Refund backoffice transaction
+      security:
+        - BearerAuth: []
+      operationId: backoffice_order_refund
+      description: |
+       This endpoint refunds the backoffice order within the system.
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      requestBody:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionID:
+                    type: integer
+                    example: 424
+                    description: The transaction ID of the merchant account. This ID can be fetched using `GET backoffice/orders`
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/POSTBackofficeRefundResponseBody"    
+                    
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /backoffice/cancel:
+    post:
+      tags:
+      - Backoffice Transaction Management
+      summary: Cancel backoffice transaction
+      security:
+        - BearerAuth: []
+      operationId: backoffice_order_cancel
+      description: |
+       This endpoint cancels the backoffice order transaction within the system.
+       
+       ### Prerequisite
+       * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials.
+        * This endpoint can be executed by an admin user only.
+      requestBody:
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionID:
+                    type: integer
+                    example: 424
+                    description: The transaction ID of the merchant account. This ID can be fetched using `GET backoffice/orders`
+                  settlementAmount:
+                    type: integer
+                    example: 500
+                    description: The amount of the backoffice order to cancel.
+        required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/POSTBackofficeCancelResponseBody"   
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+  /backoffice/transaction:
+    get:
+      tags:
+      - Backoffice Transaction Management
+      summary: Fetch backoffice transaction by ID
+      security:
+        - BearerAuth: []
+      operationId: backoffice_fetch_transaction
+      description: |
+       This endpoint fetches the backoffice order by ID within the system.
+       
+       ### Prerequisite
+        * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+       
+      parameters:
+        - in: query
+          name: id
+          description: Enter the order ID. To fetch this value, refer to the`GET /backoffice/orders` endpoint.
+          example: 563
+          schema:
+            type: integer
+            example: 412
+          required: true
+      responses:
+        200:
+          description: Transaction has been processed.
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GETBackofficeTransactionResponseBody"   
+        401:
+          description: |
+            * **Unauthorized**: The credentials entered is invalid
+            * **Full authentication is required to access this resource**
+        404:
+          description: |
+            * Record not Found
+            * Required Parameters are missing
+  /backoffice/export:
+    get:
+      tags:
+      - Backoffice Transaction Management
+      summary: Export all backoffice orders
+      security:
+        - BearerAuth: []
+      operationId: fetch_backoffice_orders
+      description: |
+        This endpoint displays all available backoffice orders in the system.
+        ### Prerequisite
+          * This endpoint requires bearer token for authentication.
+        * The bearer token must be generated using admin credentials. 
+        * This endpoint can be executed by an admin user only.
+      responses:
+        200:
+          description: Successfully fetches all backoffice orders.
+          content: 
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GETBackofficeExportResponseBody'
+components:  
+  schemas:
+    POSTClientOperationRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer           
+          example: 7
+          description: Specify the ID of the client.
+        userName:
+          type: string
+          example: johndoe_5
+          description: Specify the username of the client account.
+        password:
+          type: string
+          example: JDjohn12
+          description: Specify the password of the client account.
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify the status of the client `ACTIVE` or `INACTIVE`
+    PUTClientOperationRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer           
+          example: 7
+          description: Specify the ID of the client.
+        userName:
+          type: string
+          example: elipanov
+          description: Specify the username of the client account.
+        password:
+          type: string
+          example: ELIpanov615
+          description: Specify the password.
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify the status of th client account `ACTIVE` or `INACTIVE`.
+      
+    POSTMidOperationRequestBody:
+      type: object
+      properties:
+        accountName:
+          type: string           
+          example: Taimur
+          description: Specify the bank account name for merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4ERTULMDXCFRSXCYKM
+          description: Specify the bank credentials for merchnat account.
+        bankId:
+          type: string
+          example: 567
+          description: Specify the bank ID.
+        clientIds:          
+          type: string
+          example: 45
+          description: Specify the client ID.
+        currencyId:
+          type: object          
+          example: [0]
+          description: Specify the currency
+        descriptor:
+          type: string
+          example: done
+          description: Specify the merchant account description.
+        id:
+          type: string
+          example: 45
+          description: Specify the user ID.
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify the status of the merchant ID.
+    PUTMidOperationRequestBody:
+      type: object
+      properties:
+        accountName:
+          type: string           
+          example: Bank
+          description: Specify the name of the bank for merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: Specify the bank credentials for merchant account.
+        bankId:
+          type: integer
+          example: 6
+          description: Specify the bank ID.
+        currencyId:
+          type: object          
+          example: [0]
+          description: Specify the currency.
+        descriptor:
+          type: string
+          example: EMP_MID_23
+          description: Specify the description of the merchant account.
+        id:
+          type: integer       
+          example: 4
+          description: Specify the client ID.
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify the status of the merchant account.
+    PUTUserOperationRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer           
+          example: 4
+          description: Specify the ID of the backoffice user.
+        userName:
+          type: string
+          example: johndoe
+          description: Specify the username.
+        password:
+          type: string
+          example: P@ssw0rd1
+          description: Specify the password.
+        status:
+          type: string
+          example: INACTIVE
+          description: Specify the status of the backoffice user.
+    POSTUserOperationRequestBody:
+      type: object
+      properties:
+        id:
+          type: integer           
+          example: 4
+          description: Specify the ID of the new user.
+        userName:        
+          type: string
+          example: johndoe
+          description: Specify the username.
+        password:
+          type: string
+          example: P@ssw0rd1
+          description: Specify the password.
+        roles:
+          type: string
+          example: admin
+          description: Specify the role to be assigned to the new user. It can either be `admin` or `merchantUser`
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify if the status of the user must be `ACTIVE` or `INACTIVE`
+    POSTSignInOperationRequestBody:
+      type: object
+      properties:
+        userName: 
+          type: string
+          example: clientA
+          description: Enter your username
+        password:        
+          type: string
+          example: P@ssw0rd1
+          description: Enter your password
+    POSTSignInResponseBody:
+      type: object
+      properties:
+        accessToken:
+          type: string                     
+          example: eygV4SNNGE4G5ZZ7K+7A1VoRa+1F4+xCSIvvgFutaFmfGOOUAhwACABFFeGFtcGxlQ29udGV4dEtleQATRXhhbXBsZUNvbnRleHRWYWx1ZQAVYXdzLWNyeXB0by1wdWJsaWMta2V5AERBbzJWSlhuOTRUbFlKRzFWMzN0VE9wTXk4cW1KdnVGeXVwNEc1Nnk0VTZPK3FHbFhoaWQ2NERRRFptVmJXU1pYb3c9PQABAAdhd3Mta21zAEthcm46YXdzOmttczp1cy1lYXN0LTE6MDQ1NDEyOTIwMjgwOmtleS84MGNiMDFjZC1hMGMyLTRlMmUtYjZlMy0yMmYzYzBkNGVkNzYAuAECAQB4dA4vsLYt61GpaSLgJSfKL0St4mcUaMtPMrgd6OSxYUAB9vGI8UCSoNG73e51VQc99wAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDGa5DCGtiKLfsUlhIAIBEIA7thqZ0LdoNwT8yXe5IeA5ICvCeNk80u3xTo
+          description: Use this bearer token to sign into the system
+        idToken:        
+          type: string
+          example: eynkVit3gyCFwqcBI+uPpjzf4j5NkHRTmZUi3JmLQpZGBkCAAAQALP92c8mIPJKV01sC5ZiMaQpXbdElZKACFLbVznoHOi3p3CSfQ/dJoxa91OEHLfuAP8AAAABAAAAAAAAAAAAAAABAAAAVVgL3jw3eacEXbfsxc9QveoNNVV2GRCMjNWhuYP4TkFlmcr+dYmuFaWv0NTUIEEBTTfPlbcxesZHykVn+ynv4iEsBN9xu+eWnpSx/Vw1HtrwUfOWGplc9w+dsKuA/ST12AnlPxAPAGcwZQIxANbgLCXFqfrw29DWVMRDJ5pvmHg8pkMUw2RNhYja8+p6QVgfEEAwSQoyoPL+b8vhwwIwZFl/3vVX9tyFwXThola9pytVS0dc/SQXD+rSoJm/SgEaOiJCGFggEpPyehmH12LW
+          description: The ID token generated by the system 
+        refreshToken:        
+          type: string
+          example: eynkVit3gyCFwqcBI+uPpjzf4j5NkHRTmZUi3JmLQpZGBkCAAAQALP92c8mIPJKV01sC5ZiMaQpXbdElZKACFLbVznoHOi3p3CSfQ/dJoxa91OEHLfuAP8AAAABAAAAAAAAAAAAAAABAAAAVVgL3jw3eacEXbfsxc9QveoNNVV2GRCMjNWhuYP4TkFlmcr+dYmuFaWv0NTUIEEBTTfPlbcxesZHykVn+ynv4iEsBN9xu+eWnpSx/Vw1HtrwUfOWGplc9w+dsKuA/ST12AnlPxAPAGcwZQIxANbgLCXFqfrw29DWVMRDJ5pvmHg8pkMUw2RNhYja8+p6QVgfEEAwSQoyoPL+b8vhwwIwZFl/3vVX9tyFwXThola9pytVS0dc/SQXD+rSoJm/SgEaOiJCGFggEpPyehmH12LW
+          description: The refresh token generated by the system
+        tokenType:
+          type: string
+          example: Bearer
+          description: The auth method used by the system
+        expiresIn:
+          type: integer
+          example: 3600
+          description: Time in seconds in which the token will expire
+        groups:
+          type: array
+          items:
+            example: merchantUser
+            description: The type of user role
+    GETUsersResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the user.
+        userName:
+          type: string
+          description: The backoffice username.
+        status:
+          type: string
+          description: The backoffice user status.
+      example:
+        - id: 1
+          userName: Ahmad
+          status: ACTIVE            
+        - id: 2
+          userName: Ayesha
+          status: ACTIVE
+        - id: 3
+          userName: Marium
+          status: ACTIVE
+    GETBanksResponseBody:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: The endpoint displays ID of the user in the system.
+            example: 1
+          name:
+            type: string
+            description: The endpoint displays name of user in the system.
+            example: ABC Bank
+          systemImplementation:
+            type: object
+            properties:
+              id: 
+                type: integer
+                description: The endpoint displays merchant ID of every user in the system.
+                example: 1
+              name:
+                type: string
+                description: The endpoint displays name of merchnat account in the system.
+                example: ABC
+              fields:
+                type: string
+                description: The bank fields of the merchant account.
+                example: client_id,api_key,test_transaction
+    GETCurrencyResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the user to fetch currency details.
+
+        name:
+          type: string
+          description: The name of the user to fetch currency details.
+      example:
+        - id: 1
+          name: MKD
+        - id: 2            
+          name: USD            
+        - id: 3
+          name: EUR
+    GETBackofficeOrdersResponseBody:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 537
+                description: The order ID 
+              amount: 
+                type: string
+                example: 1800
+                description: The order amount
+              createdDate:
+                type: string
+                example: 2022-08-08T07:27:26
+                description: The date when the order was created. 
+    GETBackofficeOrderResponseBody:
+      type: object
+      properties:
+        createdDate:
+          type: string           
+          example: 2022-08-08T07:27:26
+          description: The order creation date.
+        status:
+          type: string
+          example: Auhthorized
+          description: The order status
+        issuer:
+          type: string
+          example: ABC Bank
+          description: The bank name
+        CardType:
+          type: string
+          example:
+        issuerCountry:
+          type: string
+          example: USA
+          description: The issuer country
+        cardholderName:
+          type: string
+          example:                    
+          description: The name of the card holder
+        netvalveID:
+          type: string
+          example: 365
+          description: The netvalve account ID
+        customerEmail:
+          type: string
+          example: johndoe@example.com
+          description: The email of the customer
+        cardID:
+          type: string
+          example: 
+          description: The ID mentioned on the card
+        cardNumber:
+          type: string
+          example: 411111******1111
+          description: The card number
+        brand:
+          type: string
+          example: VISA
+          description: The brand name of the card
+        paymentMethod:
+          type: string
+          example: Card
+          description: The payment method
+        paymentType:
+          type: string
+          example: Operation
+          description: The payment type
+        ipAddress:
+          type: string
+          example: 123.123.123.123
+          description: The IP address user's device.
+        responseCode:
+          type: string
+          example: 
+          description: The response code
+        accountName:
+          type: string
+          example: BANK_ABC_Client_A
+          description: The account name
+        descriptor:
+          type: string
+          example: BANK_ABC_Client_A
+          description: The descriptor of the account
+        authCode:
+          type: string
+          example: 
+          description: The authentication code
+        responseMessage:
+          type: string
+          example: {}
+          description: The response message of the system
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              createdDate:
+                type: string
+                example: 2022-08-08T07:27:26
+                description: The tranasaction creation date
+              transactionType:
+                type: string
+                example: AUTHORIZATION
+                description: The type of transaction
+              amount:
+                type: integer
+                example: 18
+                description: The transaction amount
+              status:
+                type: string
+                example: Authorized
+                description: The status of the transaction
+              transactionID:
+                type: string
+                example: 365
+                description: The transaction ID of the order
+              currency:
+                type: string
+                example: USD
+                description: The currency of the transaction
+        currency:
+          type: string
+          example: USD
+          description: The currency used for the order.
+        amountAndCurrency:
+          type: string
+          example: 18            
+          description: The order amount
+        orderAmount:
+            type: string
+            example: 18
+            description: The order amount.
+    GETMIDResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+              
+    GETMIDByIDResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+    POSTMIDResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+    PUTMIDResponseBody:
+      type: object
+      properties:
+        accountName:
+          type: string           
+          example: Bank
+          description: Specify the name of the bank for merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: Specify the bank credentials for merchant account.
+        bankId:
+          type: integer
+          example: 6
+          description: Specify the bank ID.
+        currencyId:
+          type: object          
+          example: [0]
+          description: Specify the currency.
+        descriptor:
+          type: string
+          example: EMP_MID_34
+          description: Specify the description of the merchant account.
+        id:
+          type: integer       
+          example: 4
+          description: Specify the client ID.
+        status:
+          type: string
+          example: ACTIVE
+          description: Specify the status of the merchant account `ACTIVE` or `INACTIVE
+    DELETEMIDResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+    GETMidsByClientResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+    GETMIDSByClientIDResponseBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 4
+          description: The ID of the merchant account.
+        accountName:
+          type: string
+          example: EMP_Client_B
+          description: The account name of the merchant account.
+        descriptor:
+          type: string
+          example: EMP_client_B_User_1
+          description: The account details of the merchant account.
+        bankCredentials:
+          type: string
+          example: AgV4SNNGE4G5ZZ7K+7A1VoRa+1F4+
+          description: The bank details of the merchant account.
+        status:
+          type: string
+          example: ACTIVE
+          description: The status of the merchant account.
+        bankDTO:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 4
+              description: The account id of the merchant account.
+            name:
+              type: string
+              example: EMP_Client_B_User_1
+              description: The bank details of the merchant account.
+            systemImplementation:
+              type: object
+              properties:
+                id: 
+                  type: integer
+                  example: 4
+                  description: The ID of the merchant account.
+                name:
+                  type: string
+                  example: EMP_Client_B
+                  description: The name of the merchant account.
+                fields:
+                  type: string
+                  example: client_id,api_key,test_transaction
+                  description: The account fields of the merchant account.
+        currencyDTOList:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 4
+                description: The ID of the merchant account.
+              name:
+                type: string
+                example: EUR
+                description: The name of the merchant account.
+        resultClientDTO:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 4
+              description: The ID of the merchant account.
+            userName:
+              type: string
+              example: John
+              description: The username of the merchant account.
+            status:
+              type: string
+              example: ACTIVE
+              description: The status of the merchant account.
+    GETTransactionResponseBody:
+      type: object
+      properties:
+        createdDate:
+          type: string           
+          example: 2022-08-08T07:27:26
+          description: The date when the order was created.
+        status:
+          type: string
+          example: Auhthorized
+          description: |
+                     Specify the status of the order:
+                     * Authorized
+                     * Declined
+                     * Pending
+                     * Cancelled
+        issuer:
+          type: string
+          example: TSYS
+          description: The order issued by the bank.
+        issuerCountry:
+          type: string
+          example: USA
+          description: Specify the country name which issued the order.
+        cardholderName:
+          type: string
+          example:
+          description: Specify the name of the card holder.
+        netvalveID:
+          type: string
+          example: 365
+          description: Specify the ID of the netvalve account.
+        customerEmail:
+          type: string
+          example: johndoe@example.com
+          description: Specify the email of the backoffice user.
+        cardID:
+          type: string
+          example: 
+          description: Specify the ID on the card.
+        cardNumber:
+          type: string
+          example: 411111******1111
+          description: The card number.
+        brand:
+          type: string
+          example: VISA
+          description: Specify the brand name of the card.
+        paymentMethod:
+          type: string
+          example: Card
+          description: Specify the payment method of the order.
+        paymentType:
+          type: string
+          example: Operation
+          description: Specify the payment type selected by the backoffice user.
+        ipAddress:
+          type: string
+          example: 123.123.123.123
+          description: Specify the IP address of the backoffice user's device.
+        responseCode:
+          type: string
+          example: 
+          description: Specify the response code by the backoffice user.
+        accountName:
+          type: string
+          example: John Doe
+          description: Specify the account name of the backoffice user for order details.
+        descriptor:
+          type: string
+          example: John_Doe_Bank_Account
+          description: Specify the description of the account details.
+        authCode:
+          type: string
+          example: 
+          description: Specify the authentication code provided to the merchant user.
+        responseMessage:
+          type: string
+          example: TRANSACTION IDENTIFIER
+          description: Specify the response message of the system.
+        transactions:
+          type: string
+          example: []
+          description: The type of order transaction.
+        amount:
+          type: integer
+          example: 56
+          description: The amount of the order transaction.
+        currency:
+          type: string
+          example: USD
+          description: The currency used by the issuer. To learn about all currencies, refer to `GET /backoffice/currency`.
+    POSTAuthorizeOperationRequestBody:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 1000
+          description: Specify the amount.
+        cardExpireMonth:
+              type: integer
+              example: 11
+              description: Specify month when the card will expire
+        cardExpireYear:
+              type: string
+              example: 2025
+              description: Specify the year when the card will expire
+        cardHolderName:
+              type: string
+              example: John Doe
+              description: Specify the card holder's name
+        cardNumber:
+              type: string
+              example: 6582379391084643
+              description: Specify the card number
+        cardSecurityCode:
+              type: string
+              example: 520
+              description: Specify the card security code specified at the back of the card
+        clientOrderId:
+              type: string
+              example: 424
+              description: Specify the client's order ID.
+        currency:
+              type: string
+              example: PKR
+              description: Specify the currency in which the transaction needs to take place.  To learn about all currencies, refer to `GET /backoffice/currency`.
+        customerAddress: 
+              type: string
+              example: 223, street 13, bahria town, lahore
+              description: Specify the card holder's address
+        customerCity: 
+              type: string
+              example: lahore
+              description: Specify the card holder's city
+        customerCountryCode:
+              type: string
+              example: pk
+              description: Specify the card holder's country code
+        customerEmail:
+              type: string
+              example: john.doe@example.com
+              description: Specify the card holder's email
+        customerIp:
+              type: string
+              example: 172.4.5.78
+              description: Specify the card holder's IP address
+        customerLastName:
+              type: string
+              example: Doe
+              description: Specify the card holder's last name
+        customerName:
+              type: string
+              example: John
+              description: Specify the card holder's first name
+        customerPhone:
+              type: string
+              example: +92-333-1234567
+              description: Specify the card holder's phone number
+        customerState:
+              type: string
+              example: Punjab
+              description: Specify the card holder's state
+        customerZipCode:
+              type: string
+              example: 100001
+              description: Specify the card holder's zip code
+        midId:
+          type: integer
+          example: 23
+          description: Specify the merchant ID. This ID can be fetched using `GET /backoffice/mids`.
+        motoEnabled:
+          type: boolean
+          example: false
+          description: Specify if MOTO payment is enabled
+        secureEnabled:
+          type: boolean
+          example: true
+          description: Specify if secure transaction option is enabled
+        tokenEnabled:
+          type: boolean
+          example: true
+          description: Specify if token authorization is enabled
+    POSTTransactionCancelOperationRequestBody:
+      type: object
+      properties:
+        transactionID:
+          type: string
+          example: 45
+          description: Specify the order transaction ID. 
+        settlementAmount:
+          type: integer
+          example: 0
+          description:  |
+            Specify the settlement amount. **Note:** This amount should be less than total amount.
+        tokenEnabled:
+          type: string
+          example: true
+          description: Specify if token authorization is enabled
+        motoEnabled:
+          type: boolean
+          example: false
+          description: Specify if MOTO payment is enabled
+    POSTTransactionCaptureOperationRequestBody: 
+      type: object
+      properties:
+        amount:
+          type: integer           
+          example: 450
+          description: |
+            Specify the amount to settle. **Note:** This amount should be less than total amount.
+        transactionID:
+          type: string
+          example: 45
+          description: Specify the order transaction ID. This ID can be fetched from `GET /backoffice/orders`.
+    POSTRebillOperationRequestBody:
+      type: object
+      properties:
+        amount:
+          type: integer           
+          example: 3900
+          description: Specify the amount to rebill.
+        clientOrderId:
+          type: string
+          example: 5612
+          description: Specify the client ID to rebill the transaction.
+        motoEnabled:
+          type: string
+          example: true
+          description: Specify if the MOTO is enabled.
+        tokenEnabled:
+          type: string
+          example: true
+          description: Specify if the token is enabled.
+        transactionID:
+          type: string
+          example: 75
+          description: Specify the order transaction ID.
+    GETExportResponseBody:
+                    type: object
+                    properties:
+                      contents:
+                        type: string
+                        description: The merchant account transaction details.
+                        example: "[]"
+                      pageable:
+                        type: object
+                        properties:
+                          sort:
+                            type: object
+                            properties:
+                              sorted:
+                                type: string
+                                example: false
+                                description: The export list is sorted.
+                              unsorted:
+                                type: string
+                                example: true
+                                description: The export list is unsorted.
+                              empty:
+                                type: string
+                                example: false
+                                description: The export list is empty.
+                          offset:
+                                type: integer
+                                example: 4
+                                description: The export list offset number.
+                          pageNumber:
+                                type: integer
+                                example: 3
+                                description: The page number to export.
+                          pageSize:
+                                type: integer
+                                example: 9
+                                description: The number of orders on one page to export.
+                          paged:
+                                type: string
+                                example: false
+                                description: The export list is numbered.
+                          unpaged:
+                                type: string
+                                example: false
+                                description: The export list is not numbered.
+                      totalPages:
+                        type: integer
+                        example: 10
+                        description: The total number of pages to export.
+                      totalElements:
+                        type: integer
+                        example: 15
+                        description: The number of elements to display on the export list.
+                      last:
+                        type: string
+                        example: true
+                      size:
+                        type: integer
+                        example: 7
+                        description: The size of export list.
+                      number:
+                        type: integer
+                        example: 3
+                        description: The number of exports to make.
+                      sort:
+                        type: object
+                        properties:
+                          sorted:
+                            type: string
+                            example: false
+                            description: The export list is sorted.
+                          unsorted:
+                            type: string
+                            example: true
+                            description: The export list is unsorted.
+                          empty:
+                            type: string
+                            example: false
+                            description: The export list is empty.
+                      numberofElements:
+                        type: integer
+                        example: 23
+                        description: The number of elements on every export list.
+                      first:
+                        type: string
+                        example: true
+                        description: The export list number.
+                      empty:
+                        type: string
+                        example: true
+                        description: The export list is blank.
+    POSTRecurringOperationRequestBody:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 1000
+          description: Specify the amount.
+        cardExpireMonth:
+              type: integer
+              example: 11
+              description: Specify month when the card will expire
+        cardExpireYear:
+              type: string
+              example: 2025
+              description: Specify the year when the card will expire
+        cardHolderName:
+              type: string
+              example: John Doe
+              description: Specify the card holder's name
+        cardNumber:
+              type: string
+              example: 6582379391084643
+              description: Specify the card number
+        cardSecurityCode:
+              type: string
+              example: 520
+              description: Specify the card security code specified at the back of the card
+        clientOrderId:
+              type: string
+              example: 424
+              description: Specify the client's order ID. 
+        currency:
+              type: string
+              example: PKR
+              description: Specify the currency in which the transaction needs to take place.  To learn about all currencies, refer to `GET /backoffice/currency`.
+        customerAddress: 
+              type: string
+              example: 223, street 13, bahria town, lahore
+              description: Specify the card holder's address
+        customerCity: 
+              type: string
+              example: lahore
+              description: Specify the card holder's city
+        customerCountryCode:
+              type: string
+              example: pk
+              description: Specify the card holder's country code
+        customerEmail:
+              type: string
+              example: john.doe@example.com
+              description: Specify the card holder's email
+        customerIp:
+              type: string
+              example: 172.4.5.78
+              description: Specify the card holder's IP address
+        customerLastName:
+              type: string
+              example: Doe
+              description: Specify the card holder's last name
+        customerName:
+              type: string
+              example: John
+              description: Specify the card holder's first name
+        customerPhone:
+              type: string
+              example: +92-333-1234567
+              description: Specify the card holder's phone number
+        customerState:
+              type: string
+              example: Punjab
+              description: Specify the card holder's state
+        customerZipCode:
+              type: string
+              example: 100001
+              description: Specify the card holder's zip code
+        midId:
+          type: integer
+          example: 23
+          description: Specify the merchant ID. This ID can be fetched using `GET /backoffice/mids`.
+        motoEnabled:
+          type: boolean
+          example: false
+          description: Specify if MOTO payment is enabled
+        secureEnabled:
+          type: boolean
+          example: true
+          description: Specify if secure transaction option is enabled
+        tokenEnabled:
+          type: boolean
+          example: true
+          description: Specify if token authorization is enabled
+    POSTTransactionRefundOperationRequestBody:
+      type: object
+      properties:
+        transactionID:
+          type: string
+          example: 45
+          description: Specify the order transaction ID. 
+    POSTSaleOperationRequestBody:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 1000
+          description: Specify the amount.
+        cardExpireMonth:
+              type: integer
+              example: 11
+              description: Specify month when the card will expire
+        cardExpireYear:
+              type: string
+              example: 2025
+              description: Specify the year when the card will expire
+        cardHolderName:
+              type: string
+              example: John Doe
+              description: Specify the card holder's name
+        cardNumber:
+              type: string
+              example: 6582379391084643
+              description: Specify the card number
+        cardSecurityCode:
+              type: string
+              example: 520
+              description: Specify the card security code specified at the back of the card
+        clientOrderId:
+              type: string
+              example: 424
+              description: Specify the client's order ID.
+        currency:
+              type: string
+              example: PKR
+              description: Specify the currency in which the transaction needs to take place.  To learn about all currencies, refer to `GET /backoffice/currency`.
+        customerAddress: 
+              type: string
+              example: 223, street 13, bahria town, lahore
+              description: Specify the card holder's address
+        customerCity: 
+              type: string
+              example: lahore
+              description: Specify the card holder's city
+        customerCountryCode:
+              type: string
+              example: pk
+              description: Specify the card holder's country code
+        customerEmail:
+              type: string
+              example: john.doe@example.com
+              description: Specify the card holder's email
+        customerIp:
+              type: string
+              example: 172.4.5.78
+              description: Specify the card holder's IP address
+        customerLastName:
+              type: string
+              example: Doe
+              description: Specify the card holder's last name
+        customerName:
+              type: string
+              example: John
+              description: Specify the card holder's first name
+        customerPhone:
+              type: string
+              example: +92-333-1234567
+              description: Specify the card holder's phone number
+        customerState:
+              type: string
+              example: Punjab
+              description: Specify the card holder's state
+        customerZipCode:
+              type: string
+              example: 100001
+              description: Specify the card holder's zip code
+        midId:
+          type: integer
+          example: 23
+          description: Specify the merchant ID. This ID can be fetched using `GET /backoffice/mids`.
+    POSTtsysAuthorizeOperationRequestBody:
+      type: object
+      properties:
+        amount:
+          type: integer
+          example: 1000
+          description: Specify the amount.
+        cardExpireMonth:
+              type: integer
+              example: 12
+              description: Specify month when the card will expire
+        cardExpireYear:
+              type: string
+              example: 2025
+              description: Specify the year when the card will expire
+        cardHolderName:
+              type: string
+              example: John Doe
+              description: Specify the card holder's name
+        cardNumber:
+              type: string
+              example: 6582379391084643
+              description: Specify the card number
+        cardSecurityCode:
+              type: string
+              example: 520
+              description: Specify the card security code specified at the back of the card
+        clientOrderId:
+              type: string
+              example: 424
+              description: Specify the client's order ID. 
+        currency:
+              type: string
+              example: PKR
+              description: Specify the currency in which the transaction needs to take place. To learn about all currencies, refer to `GET /backoffice/currency`.
+        customerAddress: 
+              type: string
+              example: 223, street 13, bahria town, lahore
+              description: Specify the card holder's address
+        customerCity: 
+              type: string
+              example: lahore
+              description: Specify the card holder's city
+        customerCountryCode:
+              type: string
+              example: pk
+              description: Specify the card holder's country code
+        customerEmail:
+              type: string
+              example: john.doe@example.com
+              description: Specify the card holder's email
+        customerIp:
+              type: string
+              example: 172.4.5.78
+              description: Specify the card holder's IP address
+        customerLastName:
+              type: string
+              example: Doe
+              description: Specify the card holder's last name
+        customerName:
+              type: string
+              example: John
+              description: Specify the card holder's first name
+        customerPhone:
+              type: string
+              example: +92-333-1234567
+              description: Specify the card holder's phone number
+        customerState:
+              type: string
+              example: Punjab
+              description: Specify the card holder's state
+        customerZipCode:
+              type: string
+              example: 100001
+              description: Specify the card holder's zip code
+        midId:
+          type: integer
+          example: 23
+          description: Specify the mid ID
+        motoEnabled:
+          type: boolean
+          example: false
+          description: Specify if MOTO payment is enabled
+        tokenEnabled:
+          type: boolean
+          example: true
+          description: Specify if token authorization is enabled
+    POSTBackofficeCaptureResponseBody:
+      type: object            
+      properties:
+        transactionID:
+          type: integer
+          example: 424
+          description: The transaction ID of the merchant account.
+        responseCode:
+          type: string
+          example: GTW_1000
+          description: The response generated by the system for the selected operation.
+        responseMessage:
+          type: string
+          example: Transaction Approved/Request Successful
+          description: The result of the capture operation.
+        responseCodeType:
+          type: string
+          example: APPROVED
+          description: The status of the backoffice capture operation.
+        traceID:
+          type: string
+          example: b80b95af-90a7-4f9b-a5e2-dafd7fb7312f
+          description: The traceID of the backoffice capture operation.
+        responseTimestamp:
+          type: string
+          example: 2022-09-23T05:43:19.630+00:00
+          description: The response time of the backoffice capture operation.
+    POSTBackofficeRefundResponseBody:
+      type: object            
+      properties:
+        transactionID:
+          type: integer
+          example: 424
+          description: The transaction ID of the merchant account.
+        responseCode:
+          type: string
+          example: GTW_1000
+          description: The response generated by the system for the selected operation.
+        responseMessage:
+          type: string
+          example: Transaction Approved/Request Successful
+          description: The result of the capture operation.
+        responseCodeType:
+          type: string
+          example: APPROVED
+          description: The status of the backoffice capture operation.
+        traceID:
+          type: string
+          example: b80b95af-90a7-4f9b-a5e2-dafd7fb7312f
+          description: The traceID of the backoffice capture operation.
+        responseTimestamp:
+          type: string
+          example: 2022-09-23T05:43:19.630+00:00
+          description: The response time of the backoffice capture operation.
+    POSTBackofficeCancelResponseBody:
+      type: object            
+      properties:
+        transactionID:
+          type: integer
+          example: 424
+          description: The transaction ID of the merchant account.
+        responseCode:
+          type: string
+          example: GTW_1000
+          description: The response generated by the system for the selected operation.
+        responseMessage:
+          type: string
+          example: Transaction Approved/Request Successful
+          description: The result of the capture operation.
+        responseCodeType:
+          type: string
+          example: APPROVED
+          description: The status of the backoffice capture operation.
+        traceID:
+          type: string
+          example: b80b95af-90a7-4f9b-a5e2-dafd7fb7312f
+          description: The traceID of the backoffice capture operation.
+        responseTimestamp:
+          type: string
+          example: 2022-09-23T05:43:19.630+00:00
+          description: The response time of the backoffice capture operation.
+    GETBackofficeTransactionResponseBody:
+      type: object            
+      properties:
+        createdDate:
+          type: string
+          example: 2022-09-22T08:17:40
+          description: The transaction created date of the order.
+        status:
+          type: string
+          example: captured
+          description: The transaction status of the order.
+        issuer:
+          type: string
+          example: JPMORGAN CHASE BANK N.A
+          description: The name of the issuer bank.
+        issuerCountry:
+          type: string
+          example: USA
+          description: The issuer country.
+        cardholderName:
+          type: string
+          example:                    
+          description: The name of the card holder
+        netvalveID:
+          type: string
+          example: 365
+          description: The netvalve account ID
+        customerEmail:
+          type: string
+          example: johndoe@example.com
+          description: The email of the customer
+        cardID:
+          type: string
+          example: 
+          description: The ID mentioned on the card
+        cardNumber:
+          type: string
+          example: 411111******1111
+          description: The card number
+        brand:
+          type: string
+          example: VISA
+          description: The brand name of the card
+        paymentMethod:
+          type: string
+          example: Card
+          description: The payment method
+        paymentType:
+          type: string
+          example: Operation
+          description: The payment type
+        ipAddress:
+          type: string
+          example: 123.123.123.123
+          description: The IP address user's device.
+        responseCode:
+          type: string
+          example: 
+          description: The response code
+        accountName:
+          type: string
+          example: BANK_ABC_Client_A
+          description: The account name
+        descriptor:
+          type: string
+          example: BANK_ABC_Client_A
+          description: The descriptor of the account
+        authCode:
+          type: string
+          example: 
+          description: The authentication code
+        responseMessage:
+          type: string
+          example: {}
+          description: The response message of the system
+        transactions:
+          type: array
+          items:
+            type: object
+            properties:
+              createdDate:
+                type: string
+                example: 2022-08-08T07:27:26
+                description: The tranasaction creation date
+              transactionType:
+                type: string
+                example: AUTHORIZATION
+                description: The type of transaction
+              amount:
+                type: integer
+                example: 18
+                description: The transaction amount
+              status:
+                type: string
+                example: Authorized
+                description: The status of the transaction
+              transactionID:
+                type: string
+                example: 365
+                description: The transaction ID of the order
+              currency:
+                type: string
+                example: USD
+                description: The currency of the transaction
+              responseCode:
+                type: string
+                example: GTW_1000
+                description: The response generated by the system for the selected operation.
+              responseMessage:
+                type: string
+                example: Transaction Approved/Request Successful
+                description: The result of the transaction operation.
+              allowedActions:
+                type: string
+                example: 
+                description: The actions available on the selected transaction.
+        amount: 
+          type: integer
+          example: 45.91
+          description: The amount available on the transaction ID.
+        currency:
+          type: string
+          description: The currency used for transactions. To learn about all currencies, refer to `GET /backoffice/currency`
+    GETBackofficeExportResponseBody:
+      type: object            
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              ID:
+                type: integer
+                example: 1333
+                description: The backoffice order ID. To learn about all backoffice orders in the system `GET /backoffice/orders`.
+              amount:
+                type: integer
+                example: 45.78
+                description: The backoffice order amount.
+              currency:
+                type: string
+                example: USD
+                description: The currency of the backoffice order. To learn about all currencies, refer to `GET /backoffice/currency`.
+              transactionType:
+                type: string
+                example: AUTHORIZATION
+                description: The type of backoffice order.
+              transactionReference:
+                type: integer
+                example: 1345
+                description: The transaction ID refernece for the order ID.
+              dateTime:
+                type: string
+                example: 2022-09-23T05:43:1
+                description: The created date of the backoffice order.
+              accountName:
+                type: string
+                example: EPX_CLIENT_C
+                description: The account name of the backoffice order.
+              status:
+                type: string
+                example: captured
+                description: The transaction status of the backoffice order.
+              customerEmail:
+                type: string
+                example: jondoe@example.com
+                description: The email of the backoffice user.
+              responseCode:
+                type: string
+                example: GTW_1000
+                description: The response generated by the system for the backoffice order.
+              responseMessage:
+                type: string
+                example: Transaction Approved/Request Successful
+                description: The response message of the backoffice order.
+              responseCodeType:
+                type: string
+                example: APPROVED
+                description: The status of the backoffice order.
+       
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description:  |
+        - Enter the username (user_example)
+        - Enter the password
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description:  |
+        - Enter the bearer token. This bearer token can be fetched by `POST /backoffice/users/sign-in`
+security:
+  - BasicAuth: []
+  - BearerAuth: []
